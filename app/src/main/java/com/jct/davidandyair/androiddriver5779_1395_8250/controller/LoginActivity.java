@@ -1,10 +1,12 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
 
-import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 
@@ -12,6 +14,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText usName;
     private EditText pssd;
+    private TextView signIn;
     private Button enter;
     private String userName;
     private String password;
@@ -34,9 +37,10 @@ public class LoginActivity extends AppCompatActivity {
 
     private void findViews()
     {
-        usName = findViewById(R.id.editText);
-        pssd = findViewById(R.id.editText2);
+        usName = findViewById(R.id.username);
+        pssd = findViewById(R.id.password);
         enter = findViewById(R.id.button);
+        signIn = findViewById(R.id.label);
 
         enter.setOnClickListener(new View.OnClickListener() {
                                      @Override
@@ -44,12 +48,26 @@ public class LoginActivity extends AppCompatActivity {
                                          userName = usName.getText().toString();
                                          password = pssd.getText().toString();
 
-                                         checkIdentity(userName, password);
-                                         //change activity ETC...
+                                         if (checkIdentity(userName, password))
+                                         {
+                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                             startActivity(intent);
+                                         }
+
+                                         else return; // needs to print any problem message
+
                                      }
                                  }
 
         );
+
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
