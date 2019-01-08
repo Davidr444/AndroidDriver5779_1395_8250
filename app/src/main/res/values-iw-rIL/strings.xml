@@ -11,4 +11,5 @@
     <string name="email_address">אימייל</string>
     <string name="credit_card_number">מספר כרטיס אשראי</string>
     <string name="sign_up">הירשם</string>
+    <string name="not_registered">עדיין לא רשום? הירשם</string>
 </resources>
