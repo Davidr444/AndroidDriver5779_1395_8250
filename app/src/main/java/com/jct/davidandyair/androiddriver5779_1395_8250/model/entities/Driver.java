@@ -3,7 +3,7 @@ package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 public class Driver {
     private String lastName;
     private String firstName;
-    private int id;
+    private long id;
     private String phoneNumber;
     private String emailAddress;
     private int creditCardNumber;
@@ -22,7 +22,7 @@ public class Driver {
         return creditCardNumber;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -56,7 +56,7 @@ public class Driver {
         this.firstName = firstName;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

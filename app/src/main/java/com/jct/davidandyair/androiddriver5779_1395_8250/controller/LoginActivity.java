@@ -21,7 +21,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private boolean checkIdentity(String usN, String p)
     {
-        //needs to check on the firebase whether the details are correct!
+        //TODO: needs to check on the firebase whether the details are correct!
 
         return true;
     }
@@ -54,7 +54,8 @@ public class LoginActivity extends AppCompatActivity {
                                              startActivity(intent);
                                          }
 
-                                         else return; // needs to print any problem message
+
+                                         else return; //TODO: needs to print any problem message
 
                                      }
                                  }
