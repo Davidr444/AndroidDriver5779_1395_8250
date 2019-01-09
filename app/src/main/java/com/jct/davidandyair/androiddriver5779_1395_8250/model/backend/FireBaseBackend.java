@@ -55,7 +55,7 @@ public class FireBaseBackend implements IBackend {
               {
                   Drive drive = dataSnapshot.getValue(Drive.class);
                   String id = dataSnapshot.getKey();
-                  drive.setId(Long.parseLong(id));
+                  //drive.setId(Long.parseLong(id));
                   driveList.add(drive);
                   notifyDataChange.OnDataChanged(driveList);
               }
@@ -63,14 +63,14 @@ public class FireBaseBackend implements IBackend {
               public void onChildChanged(DataSnapshot dataSnapshot, String s) {
                   Drive drive = dataSnapshot.getValue(Drive.class);
                   Long id = Long.parseLong(dataSnapshot.getKey());
-                  drive.setId(id);
+               //   drive.setId(id);
                   for (int i = 0; i < driveList.size(); i++)
                   {
-                      if (driveList.get(i).getId().equals(id))
-                      {
-                          driveList.set(i, student);
-                          break;
-                      }
+                      //if (driveList.get(i).getId().equals(id))
+                      //{
+                      //    driveList.set(i, student);
+                      //    break;
+                      //}
                   }
                   notifyDataChange.OnDataChanged(driveList);
               }
@@ -79,14 +79,14 @@ public class FireBaseBackend implements IBackend {
               {
                   Drive drive = dataSnapshot.getValue(Drive.class);
                   Long id = Long.parseLong(dataSnapshot.getKey());
-                  drive.setId(id);
+                 // drive.setId(id);
                   for (int i = 0; i < driveList.size(); i++)
                   {
-                      if (driveList.get(i).getId() ==  id)
-                      {
-                          driveList.remove(i);
-                          break;
-                      }
+                     // if (driveList.get(i).getId() ==  id)
+                     // {
+                      //    driveList.remove(i);
+                      //    break;
+                     // }
                   }
                   notifyDataChange.OnDataChanged(driveList);
               }

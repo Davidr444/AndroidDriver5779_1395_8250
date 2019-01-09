@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         usName = findViewById(R.id.username);
         pssd = findViewById(R.id.password);
-        enter = findViewById(R.id.button);
+        enter = findViewById(R.id.enter);
         signIn = findViewById(R.id.label);
 
         enter.setOnClickListener(new View.OnClickListener() {
