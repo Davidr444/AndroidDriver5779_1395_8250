@@ -1,8 +1,12 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 
+import android.location.Address;
 import android.location.Location;
 
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FireBaseBackend;
+
 import java.sql.Time;
+import java.util.Date;
 
 public class Drive {
     public enum DriveStatus {
@@ -10,13 +14,14 @@ public class Drive {
     }
 
     private DriveStatus status;
-    private Location source;
-    private Location destination;
-    private Time beginning;
-    private Time end;
+    private Address source;
+    private Address destination;
+    private Date beginning;
+    private Date end;
     private String name;
     private String phoneNumber;
     private String eMailAddress;
+    private long driverId;
 
     public Drive()
     {
@@ -28,10 +33,11 @@ public class Drive {
         this.name = null;
         this.phoneNumber = null;
         this.eMailAddress = null;
+        this.driverId = 0;
     }
 
-    public Drive(DriveStatus status, Location source, Location destination, Time beginning, Time end,
-                 String name, String phoneNumber, String eMailAddress)
+    public Drive(DriveStatus status, Address source, Address destination, Time beginning, Time end,
+                 String name, String phoneNumber, String eMailAddress, int driverId)
     {
         this.status = status;
         this.source = source;
@@ -41,22 +47,23 @@ public class Drive {
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.eMailAddress = eMailAddress;
+        this.driverId = driverId;
     }
 
     //region sets
-    public void setEnd(Time end) {
+    public void setEnd(Date end) {
         this.end = end;
     }
-    public void setDestination(Location destination) {
+    public void setDestination(Address destination) {
         this.destination = destination;
     }
-    public void setBeginning(Time beginning) {
+    public void setBeginning(Date beginning) {
         this.beginning = beginning;
     }
     public void seteMailAddress(String eMailAddress) {
         this.eMailAddress = eMailAddress;
     }
-    public void setSource(Location source) {
+    public void setSource(Address source) {
         this.source = source;
     }
     public void setName(String name) {
@@ -68,15 +75,19 @@ public class Drive {
     public void setStatus(DriveStatus status) {
         this.status = status;
     }
+    public void setDriverId(long driverId) {
+        this.driverId = driverId;
+    }
     //endregion
+
     //region gets
     public DriveStatus getStatus() {
         return status;
     }
-    public Location getDestination() {
+    public Address getDestination() {
         return destination;
     }
-    public Location getSource() {
+    public Address getSource() {
         return source;
     }
     public String getName() {
@@ -85,14 +96,18 @@ public class Drive {
     public String geteMailAddress() {
         return eMailAddress;
     }
-    public Time getBeginning() {
+    public Date getBeginning() {
         return beginning;
     }
     public String getPhoneNumber() {
         return phoneNumber;
     }
-    public Time getEnd() {
+    public Date getEnd() {
         return end;
     }
+    public long getDriverId() {
+        return driverId;
+    }
     //endregion
+
 }

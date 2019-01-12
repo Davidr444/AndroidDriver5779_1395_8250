@@ -1,6 +1,7 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.model.backend;
 
 import android.location.Address;
+import android.location.Location;
 import android.support.annotation.NonNull;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -25,16 +26,14 @@ public class FireBaseBackend implements IBackend {
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static ChildEventListener drivesRefChildEventList;
     //The list of the drives the will be return
-    static ArrayList<Drive> driveList = new ArrayList<Drive>();
+    static ArrayList<Drive> driveList;
 
-  public interface Action<T>
-  {
+  public interface Action<T>  {
       void onSuccess(T obj);
       void onFailure(Exception exception);
       void onProgress(String status, double percent);
   }
-  public interface NotifyDataChange<T>
-  {
+  public interface NotifyDataChange<T>  {
       void OnDataChanged(T obj);
       void onFailure(Exception exception);
   }
@@ -102,6 +101,33 @@ public class FireBaseBackend implements IBackend {
       }
   }
   public static void stopNotifyToDrivesList(){}
+  private void updateList(){
+      notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
+          @Override
+          public void OnDataChanged(List<Drive> obj) {
+              driveList = new ArrayList<Drive>();
+              for (Drive d:obj) {
+                  driveList.add(d);
+              }
+          }
+
+          @Override
+          public void onFailure(Exception exception) {
+
+          }
+      });
+  }
+  private float calculateDistance(Address a, Address b){
+      Location locationA = new Location("A");
+      Location locationB = new Location("B");
+
+      locationA.setLongitude(a.getLongitude());
+      locationA.setLatitude(a.getLatitude());
+      locationB.setLongitude(b.getLongitude());
+      locationB.setLatitude(b.getLatitude());
+
+      return locationA.distanceTo(locationB);
+  }
 
   @Override
     public void addDriver(final Driver drive, final Action<Long> action) {
@@ -124,37 +150,86 @@ public class FireBaseBackend implements IBackend {
 
     @Override
     public ArrayList<Drive> getUnhandledDrives(Action<Long> action) {
-        return null;
+      updateList();
+      ArrayList<Drive> returnVal = new ArrayList<Drive>();
+        for (Drive d : driveList) {
+            if(d.getStatus() == Drive.DriveStatus.AVAILABLE)
+                returnVal.add(d);
+        }
+
+      return returnVal;
     }
 
     @Override
     public ArrayList<Drive> getFinishedDrives(Action<Long> action) {
-        return null;
+      updateList();
+        ArrayList<Drive> returnVal = new ArrayList<Drive>();
+        for (Drive d : driveList) {
+            if(d.getStatus() == Drive.DriveStatus.FINISHED)
+                returnVal.add(d);
+        }
+
+        return returnVal;
     }
 
     @Override
-    public ArrayList<Drive> getDriversDrives(Driver d, Action<Long> action) {
-        return null;
+    public ArrayList<Drive> getDriversDrives(Driver driver, Action<Long> action) {
+      updateList();
+        ArrayList<Drive> returnVal = new ArrayList<Drive>();
+        for (Drive d : driveList) {
+            if(d.getDriverId() == driver.getId())
+                returnVal.add(d);
+        }
+
+        return returnVal;
     }
 
     @Override
     public ArrayList<Drive> getDrivesByCity(Address address, Action<Long> action) {
-        return null;
-    }
+      updateList();
+        ArrayList<Drive> returnVal = new ArrayList<Drive>();
+        for (Drive d : driveList) {
+            if(d.getStatus() == Drive.DriveStatus.AVAILABLE && d.getDestination().getAddressLine(0) == address.getAddressLine(0))
+                returnVal.add(d);
+        }
+
+        return returnVal;
+      }
 
     @Override
-    public ArrayList<Drive> getDrivesByDistance(Driver d, float distance, Action<Long> action) {
-        return null;
+    public ArrayList<Drive> getDrivesByDistance(Driver driver, float distance, Action<Long> action) {
+      updateList();
+        ArrayList<Drive> returnVal = new ArrayList<Drive>();
+        for (Drive d : driveList) {
+            if(calculateDistance(driver.getAddress(), d.getDestination()) == distance)
+                returnVal.add(d);
+        }
+
+        return returnVal;
     }
 
     @Override
     public ArrayList<Drive> getDrivesByDate(Date date, Action<Long> action) {
-        return null;
+        updateList();
+        ArrayList<Drive> returnVal = new ArrayList<Drive>();
+        for (Drive d:driveList) {
+            if(d.getBeginning() == date)
+                returnVal.add(d);
+        }
+
+        return returnVal;
     }
 
     @Override
     public ArrayList<Drive> getDrivesByPrice(float price, Action<Long> action) {
-        return null;
+      updateList();
+      ArrayList<Drive> returnVal = new ArrayList<Drive>();
+        for (Drive d:driveList) {
+            if((calculateDistance(d.getSource(), d.getDestination()) / 1000) * 2 == price)
+                returnVal.add(d);
+        }
+
+        return returnVal;
     }
 
     @Override
@@ -185,6 +260,4 @@ public class FireBaseBackend implements IBackend {
         });
         return list;
     }
-
-
 }

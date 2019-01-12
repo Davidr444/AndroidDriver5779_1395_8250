@@ -1,5 +1,7 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 
+import android.location.Address;
+
 public class Driver {
     private String lastName;
     private String firstName;
@@ -15,6 +17,10 @@ public class Driver {
         phoneNumber = null;
         emailAddress = null;
         // id and creditCardNumber are integers and they are automatically initialized with a grabage value!
+    }
+    public Address getAddress(){
+    //TODO: implement this function to get the address of the driver.
+        return null;
     }
 
     //region gets
