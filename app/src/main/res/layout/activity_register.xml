@@ -37,7 +37,8 @@
                 android:inputType="textPersonName"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFFFF"
-                app:backgroundTint="#FFFFFFFF"/>
+                app:backgroundTint="#FFFFFFFF"
+                android:drawableLeft="@drawable/ic_person_white"/>
 
             <EditText
                 android:id="@+id/last_name"
@@ -50,7 +51,8 @@
                 android:inputType="textPersonName"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFFFF"
-                app:backgroundTint="#FFFFFFFF"/>
+                app:backgroundTint="#FFFFFFFF"
+                android:drawableLeft="@drawable/ic_person_white"/>
 
             <EditText
                 android:id="@+id/id"
@@ -63,7 +65,8 @@
                 android:inputType="textPersonName"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFFFF"
-                app:backgroundTint="#FFFFFFFF"/>
+                app:backgroundTint="#FFFFFFFF"
+                android:drawableLeft="@drawable/ic_id_white"/>
 
             <EditText
                 android:id="@+id/phone_number"
@@ -76,7 +79,8 @@
                 android:inputType="phone"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFFFF"
-                app:backgroundTint="#FFFFFFFF"/>
+                app:backgroundTint="#FFFFFFFF"
+                android:drawableLeft="@drawable/ic_phone_white"/>
 
             <EditText
                 android:id="@+id/email"
@@ -89,7 +93,8 @@
                 android:inputType="textEmailAddress"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFFFF"
-                app:backgroundTint="#FFFFFFFF"/>
+                app:backgroundTint="#FFFFFFFF"
+                android:drawableLeft="@drawable/ic_mail_white" />
 
             <EditText
                 android:id="@+id/credit_card"
@@ -102,7 +107,8 @@
                 android:inputType="number"
                 android:layout_marginTop="10dp"
                 android:textColor="#FFFFFFFF"
-                app:backgroundTint="#FFFFFFFF"/>
+                app:backgroundTint="#FFFFFFFF"
+                android:drawableLeft="@drawable/ic_credit_card_black_24dp"/>
 
             <Button
                 android:id="@+id/button"

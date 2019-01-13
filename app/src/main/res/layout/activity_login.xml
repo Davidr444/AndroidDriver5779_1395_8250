@@ -33,7 +33,8 @@
         android:hint="@string/username"
         android:inputType="textPersonName"
         android:layout_gravity="center"
-        android:layout_marginTop="0dp" />
+        android:layout_marginTop="0dp"
+        android:drawableLeft="@drawable/ic_mail_white"/>
 
     <EditText
         android:id="@+id/password"
@@ -43,7 +44,8 @@
         android:hint="@string/password"
         android:inputType="textPassword"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+        android:layout_marginTop="10dp"
+        android:drawableLeft="@drawable/ic_password_key_white"/>
 
     <Button
         android:id="@+id/enter"
@@ -54,6 +56,15 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
+    <TextView
+        android:id="@+id/incorrect_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/incorrect_details"
+        android:textColor="@color/red"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:visibility="gone"/>
     <TextView
         android:id="@+id/label"
         android:layout_width="wrap_content"

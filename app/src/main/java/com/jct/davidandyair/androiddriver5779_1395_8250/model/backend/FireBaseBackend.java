@@ -44,7 +44,7 @@ public class FireBaseBackend implements IBackend {
       {
           if (drivesRefChildEventList != null)
           {
-              notifyDataChange.onFailure(new Exception("first unNotify student list"));
+              notifyDataChange.onFailure(new Exception("first unNotify drives list"));
               return;
           }
           driveList.clear();

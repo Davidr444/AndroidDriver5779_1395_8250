@@ -3,6 +3,7 @@ package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,14 +17,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText pssd;
     private TextView signIn;
     private Button enter;
-    private String userName;
+    private String mail;
     private String password;
 
     private boolean checkIdentity(String usN, String p)
     {
         //TODO: needs to check on the firebase whether the details are correct!
 
-        return true;
+        return false;
     }
 
 
@@ -46,17 +47,46 @@ public class LoginActivity extends AppCompatActivity {
         enter.setOnClickListener(new View.OnClickListener() {
                                      @Override
                                      public void onClick(View v) {
-                                         userName = usName.getText().toString();
+
+                                         mail = usName.getText().toString();
                                          password = pssd.getText().toString();
 
-                                         if (checkIdentity(userName, password))
+                                         //Check integrity
+                                         Boolean formIsComplete = true;
+                                         if(TextUtils.isEmpty(mail))
+                                         {
+                                             usName.setError(getText(R.string.error_empty_mail));
+                                             formIsComplete = false;
+                                         }
+                                         if(TextUtils.isEmpty(password))
+                                         {
+                                             pssd.setError(getText(R.string.error_empty_password));
+                                             formIsComplete = false;
+                                         }
+                                         //If one of the fields is empty
+                                         if(!formIsComplete)
+                                             return;
+
+                                         //Check the integrity of mail via regex
+                                         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches())
+                                         {
+                                             usName.setError(getText(R.string.error_invalid_email));
+                                             return;
+                                         }
+
+                                         if (checkIdentity(mail, password))
                                          {
                                              Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                              startActivity(intent);
                                          }
 
+                                         else
+                                         {
+                                             TextView incorrect_details = findViewById(R.id.incorrect_details);
+                                             incorrect_details.setVisibility(View.VISIBLE);
+                                             return;
+                                         }
 
-                                         else return; //TODO: needs to print any problem message
 
                                      }
                                  }

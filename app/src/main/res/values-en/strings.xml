@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Get Taxi - Driver</string>
-    <string name="username">username</string>
+    <string name="username">email</string>
     <string name="password">password</string>
     <string name="enter">enter</string>
     <string name="first_name">First Name</string>
@@ -12,4 +12,8 @@
     <string name="credit_card_number">Credit-Card Number</string>
     <string name="sign_up">Sign up</string>
     <string name="not_registered">Not yet registered? Sign up</string>
+    <string name="error_empty_mail">Please enter your email address</string>
+    <string name="error_empty_password">Please enter your password</string>
+    <string name="incorrect_details">email or password incorrect</string>
+    <string name="error_invalid_email">Invalid email address</string>
 </resources>
