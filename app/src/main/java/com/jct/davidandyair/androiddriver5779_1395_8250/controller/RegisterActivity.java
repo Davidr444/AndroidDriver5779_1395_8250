@@ -1,5 +1,6 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -72,7 +73,8 @@ public class RegisterActivity extends AppCompatActivity {
                         driver.setCreditCardNumber(Integer.parseInt(creditCardNumber.getText().toString()));
                         asyncTask.execute(driver);
 
-                        //TODO:And have to go back to LoginActivity
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
                     }
                 }
         );
