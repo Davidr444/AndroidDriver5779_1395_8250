@@ -16,4 +16,5 @@
     <string name="error_empty_password">Please enter your password</string>
     <string name="incorrect_details">email or password incorrect</string>
     <string name="error_invalid_email">Invalid email address</string>
+    <string name="empty_field">Please fill out this field</string>
 </resources>

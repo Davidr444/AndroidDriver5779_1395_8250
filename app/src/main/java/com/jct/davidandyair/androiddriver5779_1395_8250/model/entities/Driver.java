@@ -2,6 +2,7 @@ package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 
 import android.location.Address;
 
+
 public class Driver {
     private String lastName;
     private String firstName;
@@ -9,6 +10,7 @@ public class Driver {
     private String phoneNumber;
     private String emailAddress;
     private int creditCardNumber;
+    private String hashedPassword;
 
     public Driver()
     {
@@ -72,6 +74,15 @@ public class Driver {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getHashedPassword() {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String hashedPassword) {
+        //TODO: HASH THE PASSWORD
+        this.hashedPassword = hashedPassword;
     }
     //endregion
 

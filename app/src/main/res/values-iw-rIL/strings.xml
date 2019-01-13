@@ -10,10 +10,11 @@
     <string name="credit_card_number">מספר כרטיס אשראי</string>
     <string name="sign_up">הירשם</string>
     <string name="not_registered">עדיין לא רשום? הירשם</string>
-    <string name="password">"                      סיסמא"</string>
+    <string name="password">"                                 סיסמא"</string>
     <string name="username">מייל</string>
     <string name="error_empty_mail">נא הכנס את כתובת המייל שלך</string>
     <string name="error_empty_password">נא הכנס את סיסמתך</string>
     <string name="incorrect_details">מייל או סיסמא שגויים</string>
     <string name="error_invalid_email">כתובת מייל לא תקינה</string>
+    <string name="empty_field">נא למלא את השדה הנ\"ל</string>
 </resources>

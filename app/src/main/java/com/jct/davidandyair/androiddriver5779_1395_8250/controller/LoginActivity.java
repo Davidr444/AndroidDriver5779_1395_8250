@@ -1,10 +1,12 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -20,6 +22,9 @@ public class LoginActivity extends AppCompatActivity {
     private String mail;
     private String password;
 
+    /*
+     *
+     */
     private boolean checkIdentity(String usN, String p)
     {
         //TODO: needs to check on the firebase whether the details are correct!
@@ -28,15 +33,21 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         findViews();
+
+        usName.requestFocus();
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.showSoftInput(usName, InputMethodManager.SHOW_IMPLICIT);
     }
 
+    /*
+     *
+     */
     private void findViews()
     {
         usName = findViewById(R.id.username);
@@ -67,16 +78,12 @@ public class LoginActivity extends AppCompatActivity {
                                          if(!formIsComplete)
                                              return;
 
-                                         //Check the integrity of mail via regex
-                                         if(!android.util.Patterns.EMAIL_ADDRESS.matcher(mail).matches())
-                                         {
-                                             usName.setError(getText(R.string.error_invalid_email));
-                                             return;
-                                         }
 
                                          if (checkIdentity(mail, password))
                                          {
                                              Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                             //Clear all the other activities
+                                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                              startActivity(intent);
                                          }
 
@@ -86,8 +93,6 @@ public class LoginActivity extends AppCompatActivity {
                                              incorrect_details.setVisibility(View.VISIBLE);
                                              return;
                                          }
-
-
                                      }
                                  }
 

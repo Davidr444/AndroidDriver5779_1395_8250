@@ -55,6 +55,20 @@
                 android:drawableLeft="@drawable/ic_person_white"/>
 
             <EditText
+                android:id="@+id/register_password"
+                android:layout_width="237dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:layout_marginTop="10dp"
+                android:textColor="#FFFFFFFF"
+                app:backgroundTint="#FFFFFFFF"
+                android:drawableLeft="@drawable/ic_password_key_white"/>
+
+            <EditText
                 android:id="@+id/id"
                 android:layout_width="237dp"
                 android:layout_height="wrap_content"
