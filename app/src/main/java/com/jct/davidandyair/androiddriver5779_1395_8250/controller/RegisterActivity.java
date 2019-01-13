@@ -1,6 +1,8 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
 
 import android.content.Intent;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
@@ -8,7 +10,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -22,8 +28,9 @@ public class RegisterActivity extends AppCompatActivity {
     private EditText creditCardNumber;
     private EditText password;
     private Button button;
-
+    private IBackend backend;
     private Driver driver;
+    private AsyncTask<Driver, Driver, Driver> asyncTask;
 
     //TODO:is it necessary?
     public RegisterActivity() {
@@ -112,6 +119,14 @@ public class RegisterActivity extends AppCompatActivity {
         creditCardNumber = findViewById(R.id.credit_card);
         password = findViewById(R.id.register_password);
         button = findViewById(R.id.button);
+        backend = FactoryBackend.getBackend();
+        asyncTask = new AsyncTask<Driver, Driver, Driver>() {
+            @Override
+            protected Driver doInBackground(Driver... drivers) {
+                backend.addDriver(drivers[0], null);
+                return null;
+            }
+        };
 
         button.setOnClickListener(
                 new View.OnClickListener() {
@@ -129,6 +144,7 @@ public class RegisterActivity extends AppCompatActivity {
                         driver.setEmailAddress(emailAddress.getText().toString());
                         driver.setHashedPassword(password.getText().toString());
                         driver.setCreditCardNumber(Integer.parseInt(creditCardNumber.getText().toString()));
+                        asyncTask.execute(driver);
 
                         //TODO: we need to push the information into our backend!!! using asynctask
 
