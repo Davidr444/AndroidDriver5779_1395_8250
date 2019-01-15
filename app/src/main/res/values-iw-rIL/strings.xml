@@ -17,4 +17,10 @@
     <string name="incorrect_details">מייל או סיסמא שגויים</string>
     <string name="error_invalid_email">כתובת מייל לא תקינה</string>
     <string name="empty_field">נא למלא את השדה הנ\"ל</string>
+    <string name="navigation_drawer_open">פתח תפריט ניווט</string>
+    <string name="navigation_drawer_close">סגור תפריט ניווט</string>
+    <string name="nav_header_title">אנדרואיד סטודיו</string>
+    <string name="nav_header_subtitle">הכנס את הטקסט שלך כאן</string>
+    <string name="nav_header_desc">כותרת תפריט ניווט</string>
+    <string name="action_settings">הגדרות</string>
 </resources>

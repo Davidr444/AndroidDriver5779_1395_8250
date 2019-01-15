@@ -17,8 +17,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".controller.RegisterActivity" />
-        <activity android:name=".controller.MainActivity" />
-        <activity android:name=".controller.OpeningActivity"/>
+        <activity
+            android:name=".controller.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".controller.OpeningActivity" />
     </application>
 
 </manifest>

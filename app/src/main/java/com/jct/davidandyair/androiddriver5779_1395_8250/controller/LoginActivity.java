@@ -29,7 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     {
         //TODO: needs to check on the firebase whether the details are correct!
 
-        return false;
+        return true;
     }
 
 
