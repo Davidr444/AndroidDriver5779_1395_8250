@@ -11,7 +11,7 @@ import java.util.Date;
 public interface IBackend {
 
     ArrayList<Driver> getDrivers(final FireBaseBackend.Action<Long> action);
-    void addDriver(final Driver d, final FireBaseBackend.Action<Long> action);
+    void addDriver(final Driver d);
     ArrayList<Drive> getUnhandledDrives(final FireBaseBackend.Action<Long> action);
     ArrayList<Drive> getFinishedDrives(final FireBaseBackend.Action<Long> action);
     ArrayList<Drive> getDriversDrives(final Driver d, final FireBaseBackend.Action<Long> action);

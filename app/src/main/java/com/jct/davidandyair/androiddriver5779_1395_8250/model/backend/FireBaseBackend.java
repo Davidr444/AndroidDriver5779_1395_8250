@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -130,22 +131,10 @@ public class FireBaseBackend implements IBackend {
   }
 
   @Override
-    public void addDriver(final Driver drive, final Action<Long> action) {
+    public void addDriver(final Driver driver) {
         DatabaseReference myRef = database.getReference("drivers");
 
-        myRef.push().setValue(drive).addOnSuccessListener(new OnSuccessListener<Void>() {
-            @Override
-            public void onSuccess(Void aVoid) {
-                action.onSuccess(drive.getId());
-                action.onProgress("Uploads driver data", 100);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                action.onFailure(e);
-                action.onProgress("error upload driver data", 100);
-            }
-        });
+        myRef.push().setValue(driver);
     }
 
     @Override
@@ -244,12 +233,10 @@ public class FireBaseBackend implements IBackend {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    Driver newDriver = postSnapshot.getValue(Driver.class);
+                for (Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator(); it.hasNext();) {
+                    Driver newDriver = it.next().getValue(Driver.class);
                     list.add(newDriver);
                 }
-                action.onSuccess(null);
-                action.onProgress("Getting the list of drivers", 100);
             }
 
             @Override
@@ -258,6 +245,8 @@ public class FireBaseBackend implements IBackend {
                action.onProgress("error getting the list of drivers", 100);
             }
         });
+
+
         return list;
     }
 }

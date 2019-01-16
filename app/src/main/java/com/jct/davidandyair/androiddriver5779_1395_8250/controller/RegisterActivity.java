@@ -126,7 +126,7 @@ public class RegisterActivity extends AppCompatActivity {
         asyncTask = new AsyncTask<Driver, Driver, Driver>() {
             @Override
             protected Driver doInBackground(Driver... drivers) {
-                backend.addDriver(drivers[0], null);
+                backend.addDriver(drivers[0]);
                 return null;
             }
         };
@@ -148,8 +148,6 @@ public class RegisterActivity extends AppCompatActivity {
                         driver.setPassword(password.getText().toString());
                         driver.setCreditCardNumber(Integer.parseInt(creditCardNumber.getText().toString()));
                         asyncTask.execute(driver);
-
-                        //TODO: we need to push the information into our backend!!! using asynctask
 
                         Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                         //Clear all the other activities

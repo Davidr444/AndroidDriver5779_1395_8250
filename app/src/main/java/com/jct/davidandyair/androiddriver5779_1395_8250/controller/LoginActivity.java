@@ -2,7 +2,9 @@ package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 import java.util.ArrayList;
@@ -28,17 +31,10 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private IBackend backend;
 
-    /*
-     *
-     */
     private Driver checkIdentity(String mail, String p){
-        ArrayList<Driver> checkList;
-        checkList = backend.getDrivers(null);
-        for (Driver d:checkList) {
-            if(d.getEmailAddress() == mail && d.getPassword() == p)
-                return d;
-        }
-        return null;
+       // TODO: implement this function
+
+        return null; // to cancel the error message
     }
 
     @Override
@@ -101,7 +97,6 @@ public class LoginActivity extends AppCompatActivity {
                                          {
                                              TextView incorrect_details = findViewById(R.id.incorrect_details);
                                              incorrect_details.setVisibility(View.VISIBLE);
-                                             return;
                                          }
                                      }
                                  }
