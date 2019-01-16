@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#5babe0"
-    tools:context=".controller.LoginActivity"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".controller.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -16,62 +15,72 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/gifImageView"
-        android:layout_width="400dp"
-        android:layout_height="120dp"
-        android:src="@drawable/login_animation"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        />
 
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:hint="@string/username"
-        android:inputType="textPersonName"
-        android:layout_gravity="center"
-        android:layout_marginTop="0dp"
-        android:drawableLeft="@drawable/ic_mail_white"/>
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/gifImageView"
+                android:layout_width="400dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/login_animation" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="250dp"
-        android:layout_height="55dp"
-        android:ems="10"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:drawableLeft="@drawable/ic_password_key_white"/>
+            <EditText
+                android:id="@+id/username"
+                android:layout_width="250dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="0dp"
+                android:drawableLeft="@drawable/ic_mail_white"
+                android:ems="10"
+                android:hint="@string/username"
+                android:inputType="textPersonName" />
 
-    <Button
-        android:id="@+id/enter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:text="@string/enter"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/password"
+                android:layout_width="250dp"
+                android:layout_height="55dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:drawableLeft="@drawable/ic_password_key_white"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+            <!-- this is a comment
+            <TextView
+                android:id="@+id/remember_me"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
 
-    <TextView
-        android:id="@+id/incorrect_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/incorrect_details"
-        android:textColor="@color/red"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:visibility="gone"/>
-    <TextView
-        android:id="@+id/label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/not_registered"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"/>
+                android:text="@string/remember_me" />-->
+
+            <Button
+                android:id="@+id/enter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:background="#ffffff"
+                android:text="@string/enter" />
+
+            <TextView
+                android:id="@+id/incorrect_details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/incorrect_details"
+                android:textColor="@color/red"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="@string/not_registered" />
         </android.support.v7.widget.LinearLayoutCompat>
     </ScrollView>
 </android.support.v7.widget.LinearLayoutCompat>
