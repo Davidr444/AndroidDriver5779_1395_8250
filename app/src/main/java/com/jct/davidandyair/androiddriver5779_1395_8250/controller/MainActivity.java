@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
@@ -31,6 +32,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //get the driver
         Intent intent = getIntent();
         driver = (Driver)intent.getSerializableExtra("driver");
+
+        //set the menu header to the driver name
+        TextView driverName = findViewById(R.id.driver_name);
+        driverName.setText(driver.getFirstName()+" " + driver.getLastName());
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
