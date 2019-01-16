@@ -23,4 +23,5 @@
     <string name="nav_header_subtitle">הכנס את הטקסט שלך כאן</string>
     <string name="nav_header_desc">כותרת תפריט ניווט</string>
     <string name="action_settings">הגדרות</string>
+    <string name="error_id">תעודת זהות לא תקינה</string>
 </resources>

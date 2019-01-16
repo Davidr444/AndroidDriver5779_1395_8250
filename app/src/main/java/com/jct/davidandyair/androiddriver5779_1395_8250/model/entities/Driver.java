@@ -2,15 +2,17 @@ package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 
 import android.location.Address;
 
+import java.io.Serializable;
 
-public class Driver {
+
+public class Driver implements Serializable {
     private String lastName;
     private String firstName;
     private long id;
     private String phoneNumber;
     private String emailAddress;
     private int creditCardNumber;
-    private String hashedPassword;
+    private String password;
 
     public Driver()
     {
@@ -76,13 +78,13 @@ public class Driver {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getHashedPassword() {
-        return hashedPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setHashedPassword(String hashedPassword) {
+    public void setPassword(String password) {
         //TODO: HASH THE PASSWORD
-        this.hashedPassword = hashedPassword;
+        this.password = password;
     }
     //endregion
 

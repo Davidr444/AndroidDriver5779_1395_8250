@@ -12,6 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
+
+import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -21,17 +26,20 @@ public class LoginActivity extends AppCompatActivity {
     private Button enter;
     private String mail;
     private String password;
+    private IBackend backend;
 
     /*
      *
      */
-    private boolean checkIdentity(String usN, String p)
-    {
-        //TODO: needs to check on the firebase whether the details are correct!
-
-        return true;
+    private Driver checkIdentity(String mail, String p){
+        ArrayList<Driver> checkList;
+        checkList = backend.getDrivers(null);
+        for (Driver d:checkList) {
+            if(d.getEmailAddress() == mail && d.getPassword() == p)
+                return d;
+        }
+        return null;
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,7 @@ public class LoginActivity extends AppCompatActivity {
         pssd = findViewById(R.id.password);
         enter = findViewById(R.id.enter);
         signIn = findViewById(R.id.label);
+        backend = FactoryBackend.getBackend();
 
         enter.setOnClickListener(new View.OnClickListener() {
                                      @Override
@@ -78,12 +87,13 @@ public class LoginActivity extends AppCompatActivity {
                                          if(!formIsComplete)
                                              return;
 
-
-                                         if (checkIdentity(mail, password))
+                                         Driver dr = checkIdentity(mail, password); // dr is the driver who logged in
+                                         if (dr != null)
                                          {
                                              Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                              //Clear all the other activities
                                              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                             intent.putExtra("driver",dr);
                                              startActivity(intent);
                                          }
 

@@ -1,7 +1,6 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
 
 import android.content.Intent;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
@@ -103,6 +100,12 @@ public class RegisterActivity extends AppCompatActivity {
             password.setError("Password must contain at least 6 characters");
             return false;
         }
+
+        if(id.getText().length() != 9)
+        {
+            id.setError("invalid ID");
+            return false;
+        }
         return true;
     }
 
@@ -142,7 +145,7 @@ public class RegisterActivity extends AppCompatActivity {
                         driver.setId(Integer.parseInt(id.getText().toString()));
                         driver.setPhoneNumber(phoneNumber.getText().toString());
                         driver.setEmailAddress(emailAddress.getText().toString());
-                        driver.setHashedPassword(password.getText().toString());
+                        driver.setPassword(password.getText().toString());
                         driver.setCreditCardNumber(Integer.parseInt(creditCardNumber.getText().toString()));
                         asyncTask.execute(driver);
 
