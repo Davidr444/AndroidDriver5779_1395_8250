@@ -19,8 +19,7 @@
         <activity android:name=".controller.activities.RegisterActivity" />
         <activity
             android:name=".controller.activities.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".controller.activities.OpeningActivity" />
     </application>
 

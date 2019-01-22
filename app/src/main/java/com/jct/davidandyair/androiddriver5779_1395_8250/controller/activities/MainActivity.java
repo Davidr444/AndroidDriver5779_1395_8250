@@ -14,7 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments.AboutUsFragment;
 import com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments.HomeFragment;
+import com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments.MyDrivesFragment;
 import com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments.OrdersFragment;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
@@ -93,8 +95,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        //TODO: Add Fragments
+        // Handle navigation view item clicks here:
+
         int id = item.getItemId();
 
         if (id == R.id.nav_orders) {
@@ -102,16 +104,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(ordersFragment);
 
         } else if (id == R.id.nav_my_drives) {
+            MyDrivesFragment myDrivesFragment = new MyDrivesFragment();
+            loadFragment(myDrivesFragment);
 
         } else if (id == R.id.nav_home) {
             HomeFragment homeFragment = new HomeFragment();
             loadFragment(homeFragment);
 
         } else if (id == R.id.nav_about) {
+            AboutUsFragment aboutUsFragment = new AboutUsFragment();
+            loadFragment(aboutUsFragment);
 
         } else if (id == R.id.nav_share) {
+            //TODO: Add Share Options
 
         } else if (id == R.id.nav_exit) {
+            //TODO: Close The App
 
         }
 
