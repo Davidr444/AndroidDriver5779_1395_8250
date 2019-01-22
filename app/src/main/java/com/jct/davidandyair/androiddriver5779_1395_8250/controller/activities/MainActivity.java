@@ -119,8 +119,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             //TODO: Add Share Options
 
         } else if (id == R.id.nav_exit) {
-            //TODO: Close The App
-
+            //TODO: Ask the user if he or she is sure they want to close the app
+            this.finishAffinity();
         }
 
         drawer.closeDrawer(GravityCompat.START);
