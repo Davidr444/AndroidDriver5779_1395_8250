@@ -1,4 +1,4 @@
-package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
+package com.jct.davidandyair.androiddriver5779_1395_8250.controller.activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;

@@ -1,10 +1,8 @@
-package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
+package com.jct.davidandyair.androiddriver5779_1395_8250.controller.activities;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -16,10 +14,7 @@ import android.widget.TextView;
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
-import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
-
-import java.util.ArrayList;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -84,7 +79,8 @@ public class LoginActivity extends AppCompatActivity {
                                              return;
 
                                          Driver dr = checkIdentity(mail, password); // dr is the driver who logged in
-                                         if (dr != null)
+                                         if(true)
+                                         //if (dr != null)
                                          {
                                              Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                              //Clear all the other activities

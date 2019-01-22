@@ -1,11 +1,9 @@
-package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
+package com.jct.davidandyair.androiddriver5779_1395_8250.controller.activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
-import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;

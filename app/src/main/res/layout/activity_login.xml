@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="#5babe0"
     android:orientation="vertical"
-    tools:context=".controller.LoginActivity">
+    tools:context=".controller.activities.LoginActivity">
 
     <ScrollView
         android:layout_width="match_parent"

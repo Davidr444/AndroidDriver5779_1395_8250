@@ -1,6 +1,6 @@
-package com.jct.davidandyair.androiddriver5779_1395_8250.controller;
+package com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;

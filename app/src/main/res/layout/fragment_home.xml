@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginTop="211dp"
-        android:text=""
+        android:text="Home"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
