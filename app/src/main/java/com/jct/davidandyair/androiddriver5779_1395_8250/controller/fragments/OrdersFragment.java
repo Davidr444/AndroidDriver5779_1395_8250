@@ -8,9 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
 
 public class OrdersFragment extends Fragment {
     View view;
+    IBackend backend;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {

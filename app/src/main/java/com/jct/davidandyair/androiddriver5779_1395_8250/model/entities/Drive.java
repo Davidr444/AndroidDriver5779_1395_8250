@@ -49,6 +49,20 @@ public class Drive {
         this.eMailAddress = eMailAddress;
         this.driverId = driverId;
     }
+    public boolean compareTo(Drive d){
+        if(
+        d.status == status&&
+        d.source == source&&
+        d.destination == destination&&
+        d.beginning == beginning&&
+        d.end == end&&
+                d.name.equals(name) &&
+                d.phoneNumber.equals(phoneNumber) &&
+                d.eMailAddress.equals(eMailAddress) &&
+        d.driverId == driverId)
+            return true;
+        else return false;
+    }
 
     //region sets
     public void setEnd(Date end) {

@@ -16,6 +16,8 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBac
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
+import java.util.List;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usName;
@@ -27,9 +29,14 @@ public class LoginActivity extends AppCompatActivity {
     private IBackend backend;
 
     private Driver checkIdentity(String mail, String p){
-       // TODO: implement this function
+        List<Driver> drivers = backend.getDrivers(null);
 
-        return null; // to cancel the error message
+        for (Driver driver:drivers) {
+            if(driver.getEmailAddress().equals(mail) && driver.getPassword().equals(p))
+                return driver;
+        }
+
+        return null;
     }
 
     @Override
@@ -44,9 +51,6 @@ public class LoginActivity extends AppCompatActivity {
         imm.showSoftInput(usName, InputMethodManager.SHOW_IMPLICIT);
     }
 
-    /*
-     *
-     */
     private void findViews()
     {
         usName = findViewById(R.id.username);
@@ -79,8 +83,7 @@ public class LoginActivity extends AppCompatActivity {
                                              return;
 
                                          Driver dr = checkIdentity(mail, password); // dr is the driver who logged in
-                                         if(true)
-                                         //if (dr != null)
+                                         if (dr != null)
                                          {
                                              Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                              //Clear all the other activities

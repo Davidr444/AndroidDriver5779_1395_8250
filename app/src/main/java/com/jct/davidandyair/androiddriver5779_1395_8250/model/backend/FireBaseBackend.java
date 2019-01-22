@@ -15,6 +15,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -24,91 +25,132 @@ import java.util.List;
 import java.util.Map;
 
 public class FireBaseBackend implements IBackend {
-    static FirebaseDatabase database = FirebaseDatabase.getInstance();
-    private static ChildEventListener drivesRefChildEventList;
-    //The list of the drives the will be return
-    static ArrayList<Drive> driveList;
+    public interface Action<T>  {
+        void onSuccess(T obj);
+        void onFailure(Exception exception);
+        void onProgress(String status, double percent);
+    }
+    public interface NotifyDataChange<T>  {
+        void OnDataChanged(T obj);
+        void onFailure(Exception exception);
+    }
 
-  public interface Action<T>  {
-      void onSuccess(T obj);
-      void onFailure(Exception exception);
-      void onProgress(String status, double percent);
-  }
-  public interface NotifyDataChange<T>  {
-      void OnDataChanged(T obj);
-      void onFailure(Exception exception);
-  }
+    private List<Driver> drivers = new ArrayList<Driver>();
+    private List<Drive> drives = new ArrayList<Drive>();
 
-  public static void notifyToDrivesList(final NotifyDataChange<List<Drive>> notifyDataChange){
-      DatabaseReference DrivesRef = database.getReference("drives");
-      if (notifyDataChange != null)
-      {
-          if (drivesRefChildEventList != null)
-          {
-              notifyDataChange.onFailure(new Exception("first unNotify drives list"));
-              return;
-          }
-          driveList.clear();
-          drivesRefChildEventList = new ChildEventListener() {
-              @Override
-              public void onChildAdded(DataSnapshot dataSnapshot, String s)
-              {
-                  Drive drive = dataSnapshot.getValue(Drive.class);
-                  String id = dataSnapshot.getKey();
-                  //drive.setId(Long.parseLong(id));
-                  driveList.add(drive);
-                  notifyDataChange.OnDataChanged(driveList);
-              }
-              @Override
-              public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                  Drive drive = dataSnapshot.getValue(Drive.class);
-                  Long id = Long.parseLong(dataSnapshot.getKey());
-               //   drive.setId(id);
-                  for (int i = 0; i < driveList.size(); i++)
-                  {
-                      //if (driveList.get(i).getId().equals(id))
-                      //{
-                      //    driveList.set(i, student);
-                      //    break;
-                      //}
-                  }
-                  notifyDataChange.OnDataChanged(driveList);
-              }
-              @Override
-              public void onChildRemoved(DataSnapshot dataSnapshot)
-              {
-                  Drive drive = dataSnapshot.getValue(Drive.class);
-                  Long id = Long.parseLong(dataSnapshot.getKey());
-                 // drive.setId(id);
-                  for (int i = 0; i < driveList.size(); i++)
-                  {
-                     // if (driveList.get(i).getId() ==  id)
-                     // {
-                      //    driveList.remove(i);
-                      //    break;
-                     // }
-                  }
-                  notifyDataChange.OnDataChanged(driveList);
-              }
-              @Override
-              public void onChildMoved(DataSnapshot dataSnapshot, String s)
-              { }
-              @Override
-              public void onCancelled(DatabaseError databaseError) {
-                  notifyDataChange.onFailure(databaseError.toException());
-              }
-          };
-          DrivesRef.addChildEventListener(drivesRefChildEventList);
-      }
-  }
-  public static void stopNotifyToDrivesList(){}
-  private void updateList(){
+    private static ChildEventListener drivesRefChildEventListener;
+    private static ChildEventListener driversRefChildEventListener;
+    private static FirebaseDatabase database = FirebaseDatabase.getInstance();
+    private static DatabaseReference driverRef = database.getReference("Drivers");
+    private static DatabaseReference drivesRef = database.getReference("Drives");
+
+    private void notifyToDrivesList(final NotifyDataChange<List<Drive>> notifyDataChange){
+        if (notifyDataChange != null)
+        {
+            if (drivesRefChildEventListener != null)
+            {
+                notifyDataChange.onFailure(new Exception("first unNotify drives list"));
+                return;
+            }
+            drives.clear();
+            drivesRefChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    Drive drive = dataSnapshot.getValue(Drive.class);
+                    String id = dataSnapshot.getKey();
+                    try{drives.add(drive);}
+                    catch(Exception e){e.printStackTrace();}
+                    notifyDataChange.OnDataChanged(drives);
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot){}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s)
+                { }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    notifyDataChange.onFailure(databaseError.toException());
+                }
+            };
+            drivesRef.addChildEventListener(drivesRefChildEventListener);
+        }
+    }
+    private void notifyToDriverList(final NotifyDataChange<List<Driver>> notifyDataChange){
+        if (notifyDataChange != null)
+        {
+            if (driversRefChildEventListener != null)
+            {
+                notifyDataChange.onFailure(new Exception("first unNotify drivers list"));
+                return;
+            }
+            drivers.clear();
+            driversRefChildEventListener = new ChildEventListener() {
+                @Override
+                public void onChildAdded(DataSnapshot dataSnapshot, String s)
+                {
+                    Driver driver = dataSnapshot.getValue(Driver.class);
+                    String id = dataSnapshot.getKey();
+                    try{drivers.add(driver);}
+                    catch(Exception e){e.printStackTrace();}
+                    notifyDataChange.OnDataChanged(drivers);
+                }
+                @Override
+                public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+                @Override
+                public void onChildRemoved(DataSnapshot dataSnapshot){}
+                @Override
+                public void onChildMoved(DataSnapshot dataSnapshot, String s)
+                { }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    notifyDataChange.onFailure(databaseError.toException());
+                }
+            };
+            driverRef.addChildEventListener(driversRefChildEventListener);
+        }
+    }
+    public static void stopNotifyToDrivesList(){
+        if(drivesRefChildEventListener != null){
+            drivesRef.removeEventListener(drivesRefChildEventListener);
+            drivesRefChildEventListener = null;
+        }
+    }
+    public static void stopNotifyToDriversList(){
+        if(driversRefChildEventListener != null){
+            driverRef.removeEventListener(driversRefChildEventListener);
+            driversRefChildEventListener = null;
+        }
+    }
+    private float calculateDistance(Address a, Address b){
+        Location locationA = new Location("A");
+        Location locationB = new Location("B");
+
+        locationA.setLongitude(a.getLongitude());
+        locationA.setLatitude(a.getLatitude());
+        locationB.setLongitude(b.getLongitude());
+        locationB.setLatitude(b.getLatitude());
+
+        return locationA.distanceTo(locationB);
+    }
+
+    @Override
+    public void addDriver(final Driver driver) {
+      driverRef.push().setValue(driver);
+    }
+
+    @Override
+    public List<Drive> getUnhandledDrives(Action<Long> action){
+      boolean flag = true;
       notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
           @Override
-          public void OnDataChanged(List<Drive> obj) {
-              driveList = new ArrayList<Drive>();
-              for (Drive d:obj) {
-                  driveList.add(d);
+          public void OnDataChanged(List<Drive> notifyDrive) {
+              drives = notifyDrive;
+              for (Drive drive:drives) {
+                  if(drive.getStatus() != Drive.DriveStatus.AVAILABLE)
+                      drives.remove(drive);
               }
           }
 
@@ -117,136 +159,162 @@ public class FireBaseBackend implements IBackend {
 
           }
       });
-  }
-  private float calculateDistance(Address a, Address b){
-      Location locationA = new Location("A");
-      Location locationB = new Location("B");
 
-      locationA.setLongitude(a.getLongitude());
-      locationA.setLatitude(a.getLatitude());
-      locationB.setLongitude(b.getLongitude());
-      locationB.setLatitude(b.getLatitude());
-
-      return locationA.distanceTo(locationB);
-  }
-
-  @Override
-    public void addDriver(final Driver driver) {
-        DatabaseReference myRef = database.getReference("drivers");
-
-        myRef.push().setValue(driver);
+      return drives;
     }
 
     @Override
-    public ArrayList<Drive> getUnhandledDrives(Action<Long> action) {
-      updateList();
-      ArrayList<Drive> returnVal = new ArrayList<Drive>();
-        for (Drive d : driveList) {
-            if(d.getStatus() == Drive.DriveStatus.AVAILABLE)
-                returnVal.add(d);
+    public List<Drive> getFinishedDrives(Action<Long> action) {
+      notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
+          @Override
+          public void OnDataChanged(List<Drive> notifyDrives) {
+              drives = notifyDrives;
+              for (Drive drive:drives) {
+                  if(drive.getStatus() != Drive.DriveStatus.FINISHED)
+                      drives.remove(drive);
+              }
+          }
+
+          @Override
+          public void onFailure(Exception exception) {
+
+          }
+      });
+
+      return drives;
+    }
+
+    @Override
+    public List<Drive> getDriversDrives(final Driver driver, Action<Long> action) {
+      notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
+          @Override
+          public void OnDataChanged(List<Drive> obj) {
+              drives = obj;
+              for (Drive drive:drives ) {
+                  if(driver.getId() != drive.getDriverId())
+                      drives.remove(drive);
+              }
+          }
+
+          @Override
+          public void onFailure(Exception exception) {
+
+          }
+      });
+
+      return drives;
+    }
+
+    @Override
+    public List<Drive> getDrivesByCity(Address address, Action<Long> action) {
+      List<Drive> cityDrives = getUnhandledDrives(null);
+      List<Drive> toRemove = new ArrayList<Drive>();
+
+        for (Drive drive:cityDrives) {
+            if(address.getAddressLine(0) != drive.getDestination().getAddressLine(0))
+                toRemove.add(drive);
         }
+
+        cityDrives.removeAll(toRemove);
+        return cityDrives;
+    }
+
+    @Override
+    public List<Drive> getDrivesByDistance(Driver driver, float distance, Action<Long> action) {
+      List<Drive> driverDrives = getUnhandledDrives(null);
+        for (Drive drive:driverDrives) {
+            //if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)//todo: implemnt getCurrentLocation that return adddress in the driver class.
+                driverDrives.remove(drive);
+        }
+
+        return driverDrives;
+    }
+
+    @Override
+    public List<Drive> getDrivesByDate(Date date, Action<Long> action) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("DD/MM//YYYY");
+        List<Drive> returnVal = getFinishedDrives(null);
+        List<Drive> toRemove = new ArrayList<Drive>();
+
+        for (Drive drive:returnVal) {
+            if(simpleDateFormat.format(drive.getBeginning()) != simpleDateFormat.format(date))
+                toRemove.add(drive);
+        }
+
+        returnVal.removeAll(toRemove);
+        return returnVal;
+    }
+
+    @Override
+    public List<Drive> getDrivesByPrice(float price, Action<Long> action) {
+      List<Drive> returnVal = getUnhandledDrives(null);
+        for (Drive drive:returnVal) {
+            float drivePrice = calculateDistance(drive.getSource(), drive.getDestination())/1000 * 5;
+            if(drivePrice != price)
+                returnVal.remove(drive);
+        }
+
+        return returnVal;
+    }
+
+    @Override
+    public List<Driver> getDrivers(final Action<Long> action){
+      final List<Driver> returnVal = new ArrayList<Driver>();
+      notifyToDriverList(new NotifyDataChange<List<Driver>>() {
+          @Override
+          public void OnDataChanged(List<Driver> obj) {
+              drivers = obj;
+              for (Driver driver:drivers) {
+                  returnVal.add(driver);
+              }
+          }
+
+          @Override
+          public void onFailure(Exception exception) {
+
+          }
+      });
 
       return returnVal;
-    }
+  }
 
     @Override
-    public ArrayList<Drive> getFinishedDrives(Action<Long> action) {
-      updateList();
-        ArrayList<Drive> returnVal = new ArrayList<Drive>();
-        for (Drive d : driveList) {
-            if(d.getStatus() == Drive.DriveStatus.FINISHED)
-                returnVal.add(d);
-        }
-
-        return returnVal;
-    }
-
-    @Override
-    public ArrayList<Drive> getDriversDrives(Driver driver, Action<Long> action) {
-      updateList();
-        ArrayList<Drive> returnVal = new ArrayList<Drive>();
-        for (Drive d : driveList) {
-            if(d.getDriverId() == driver.getId())
-                returnVal.add(d);
-        }
-
-        return returnVal;
-    }
-
-    @Override
-    public ArrayList<Drive> getDrivesByCity(Address address, Action<Long> action) {
-      updateList();
-        ArrayList<Drive> returnVal = new ArrayList<Drive>();
-        for (Drive d : driveList) {
-            if(d.getStatus() == Drive.DriveStatus.AVAILABLE && d.getDestination().getAddressLine(0) == address.getAddressLine(0))
-                returnVal.add(d);
-        }
-
-        return returnVal;
-      }
-
-    @Override
-    public ArrayList<Drive> getDrivesByDistance(Driver driver, float distance, Action<Long> action) {
-      updateList();
-        ArrayList<Drive> returnVal = new ArrayList<Drive>();
-        for (Drive d : driveList) {
-            if(calculateDistance(driver.getAddress(), d.getDestination()) == distance)
-                returnVal.add(d);
-        }
-
-        return returnVal;
-    }
-
-    @Override
-    public ArrayList<Drive> getDrivesByDate(Date date, Action<Long> action) {
-        updateList();
-        ArrayList<Drive> returnVal = new ArrayList<Drive>();
-        for (Drive d:driveList) {
-            if(d.getBeginning() == date)
-                returnVal.add(d);
-        }
-
-        return returnVal;
-    }
-
-    @Override
-    public ArrayList<Drive> getDrivesByPrice(float price, Action<Long> action) {
-      updateList();
-      ArrayList<Drive> returnVal = new ArrayList<Drive>();
-        for (Drive d:driveList) {
-            if((calculateDistance(d.getSource(), d.getDestination()) / 1000) * 2 == price)
-                returnVal.add(d);
-        }
-
-        return returnVal;
-    }
-
-    @Override
-    public ArrayList<Driver> getDrivers(final Action<Long> action) {
-
-        DatabaseReference myRef = database.getReference("drivers");
-
-        //The list of the drivers the will be return
-        final ArrayList<Driver> list = new ArrayList<Driver>();
-
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+    public List<String> getDriversNames(final Action<Long> action){
+        final List<String> returnVal = new ArrayList<String>();
+        notifyToDriverList(new NotifyDataChange<List<Driver>>() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (Iterator<DataSnapshot> it = dataSnapshot.getChildren().iterator(); it.hasNext();) {
-                    Driver newDriver = it.next().getValue(Driver.class);
-                    list.add(newDriver);
+            public void OnDataChanged(List<Driver> obj) {
+                drivers = obj;
+                for (Driver driver:drivers) {
+                    String fullName = driver.getFirstName() + " " + driver.getLastName();
+                    returnVal.add(fullName);
                 }
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-               action.onFailure(null);
-               action.onProgress("error getting the list of drivers", 100);
+            public void onFailure(Exception exception) {
+
             }
         });
 
-
-        return list;
+        return returnVal;
     }
+
+    /*@Override todo: implement this function that should let us the ability to update a drive.
+    public void updateDrive(final Drive toUpdate){
+        notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
+            @Override
+            public void OnDataChanged(List<Drive> obj) {
+                for (Drive drive:obj) {
+                    if(drive.compareTo(toUpdate))
+
+                }
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+        });
+    }*/
 }
