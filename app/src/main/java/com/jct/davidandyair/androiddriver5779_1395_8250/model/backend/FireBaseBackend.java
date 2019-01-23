@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Map;
 
 public class FireBaseBackend implements IBackend {
+
+    //region Interfaces
     public interface Action<T>  {
         void onSuccess(T obj);
         void onFailure(Exception exception);
@@ -34,16 +36,22 @@ public class FireBaseBackend implements IBackend {
         void OnDataChanged(T obj);
         void onFailure(Exception exception);
     }
+    //endregion
 
+    //region Lists
     private List<Driver> drivers = new ArrayList<Driver>();
     private List<Drive> drives = new ArrayList<Drive>();
+    //endregion
 
+    //region FireBase fields
     private static ChildEventListener drivesRefChildEventListener;
     private static ChildEventListener driversRefChildEventListener;
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference driverRef = database.getReference("Drivers");
     private static DatabaseReference drivesRef = database.getReference("Drives");
+    //endregion
 
+    //region Notify Functions
     private void notifyToDrivesList(final NotifyDataChange<List<Drive>> notifyDataChange){
         if (notifyDataChange != null)
         {
@@ -124,6 +132,8 @@ public class FireBaseBackend implements IBackend {
             driversRefChildEventListener = null;
         }
     }
+    //endregion
+
     private float calculateDistance(Address a, Address b){
         Location locationA = new Location("A");
         Location locationB = new Location("B");
