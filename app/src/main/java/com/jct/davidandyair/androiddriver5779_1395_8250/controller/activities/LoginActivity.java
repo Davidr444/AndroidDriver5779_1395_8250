@@ -3,6 +3,7 @@ package com.jct.davidandyair.androiddriver5779_1395_8250.controller.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -28,6 +29,7 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private IBackend backend;
 
+    @Nullable
     private Driver checkIdentity(String mail, String p){
         List<Driver> drivers = backend.getDrivers(null);
 
