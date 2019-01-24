@@ -25,4 +25,16 @@
     <string name="action_settings">הגדרות</string>
     <string name="error_id">תעודת זהות לא תקינה</string>
     <string name="remember_me">זכור אותי</string>
+    <string name="name">שם:</string>
+    <string name="hello_blank_fragment">שלום פרגמנט ריק</string>
+    <string name="distance">מרחק:</string>
+    <string name="km">ק\"מ</string>
+    <string name="item_source">מוצא:</string>
+    <string name="item_destination">יעד:</string>
+    <string name="price">מחיר:</string>
+    <string name="coin">ש\"ח</string>
+    <string name="send_mail">שלח מייל לנוסע</string>
+    <string name="call_passenger">התקשר לנוסע</string>
+    <string name="sms_passenger">שלח הודעה לנוסע</string>
+    <string name="take_drive">קבל נסיעה</string>
 </resources>
