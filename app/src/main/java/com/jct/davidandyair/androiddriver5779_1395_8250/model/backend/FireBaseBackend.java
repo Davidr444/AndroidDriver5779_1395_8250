@@ -288,6 +288,13 @@ public class FireBaseBackend implements IBackend {
       return returnVal;
   }
 
+
+    @Override
+    public void changeStatus(Drive.DriveStatus status){
+        // todo: implement this function
+    }
+
+
     @Override
     public List<String> getDriversNames(final Action<Long> action){
         final List<String> returnVal = new ArrayList<String>();
@@ -310,7 +317,7 @@ public class FireBaseBackend implements IBackend {
         return returnVal;
     }
 
-    /*@Override todo: implement this function that should let us the ability to update a drive.
+    @Override todo: implement this function that should let us the ability to update a drive.
     public void updateDrive(final Drive toUpdate){
         notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
             @Override
@@ -326,5 +333,5 @@ public class FireBaseBackend implements IBackend {
 
             }
         });
-    }*/
+    }
 }

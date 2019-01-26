@@ -38,4 +38,6 @@
     <string name="call_passenger">Call</string>
     <string name="sms_passenger">"Send message "</string>
     <string name="take_drive">Take The Drive</string>
+    <string name="pass_progress">pass progress</string>
+    <string name="Taxi_On_The_Way">your taxi is on the way</string>
 </resources>
