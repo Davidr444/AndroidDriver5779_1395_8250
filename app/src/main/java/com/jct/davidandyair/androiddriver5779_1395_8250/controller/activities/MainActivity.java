@@ -23,7 +23,7 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    Driver driver;
+    public Driver driver;
     DrawerLayout drawer;
 
     @Override

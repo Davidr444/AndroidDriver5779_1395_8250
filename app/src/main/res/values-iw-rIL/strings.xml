@@ -39,4 +39,5 @@
     <string name="take_drive">קבל נסיעה</string>
     <string name="share_message">גם אני משתמש בגט טקסי. הצטרף אלי ותהנה משירותי מוניות מתקדמים דרך הסמארטפון!</string>
     <string name="share_title">שתף את גט טקסי באמצעות:</string>
+    <string name="welcome_driver">" ,ברוך הבא!"</string>
 </resources>

@@ -42,4 +42,5 @@
     <string name="Taxi_On_The_Way">your taxi is on the way</string>
     <string name="share_message">I also use Get Taxi. Join me and enjoy advanced taxi services through your smartphone!</string>
     <string name="share_title">Share Get taxi with:</string>
+    <string name="welcome_driver">, welcome!</string>
 </resources>
