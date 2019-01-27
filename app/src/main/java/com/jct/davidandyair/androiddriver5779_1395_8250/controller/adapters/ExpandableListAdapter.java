@@ -238,7 +238,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
                 // We perform filtering operation
                 List<Drive> nRideList = new ArrayList<Drive>();
                 for (Drive ride : driveList) {
-                    float distance = (AddressToLocation(ride.getSource()).distanceTo(locationA));
+                    float distance = (AddressToLocation(ride.getSource()).distanceTo(driver.getCurrentLocation()));
                     distance /= 100;
                     int temp = (int)(distance);
                     distance = (float)(temp) / 10;
