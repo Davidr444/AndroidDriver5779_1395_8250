@@ -23,4 +23,5 @@ public interface IBackend {
     List<String> getDriversNames(final FireBaseBackend.Action<Long> action);
     void changeStatus(Drive drive, Drive.DriveStatus status);
     void updateDrive(final Drive toUpdate);
+    float getPrice(Address source, Address destination);
 }

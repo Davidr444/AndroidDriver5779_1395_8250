@@ -37,4 +37,6 @@
     <string name="call_passenger">התקשר לנוסע</string>
     <string name="sms_passenger">שלח הודעה לנוסע</string>
     <string name="take_drive">קבל נסיעה</string>
+    <string name="share_message">גם אני משתמש בגט טקסי. הצטרף אלי ותהנה משירותי מוניות מתקדמים דרך הסמארטפון!</string>
+    <string name="share_title">שתף את גט טקסי באמצעות:</string>
 </resources>

@@ -8,7 +8,9 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FireBaseBa
 import java.sql.Time;
 import java.util.Date;
 
+
 public class Drive {
+
     public enum DriveStatus {
         AVAILABLE, IN_PROGRESS, FINISHED
     }
@@ -22,6 +24,7 @@ public class Drive {
     private String phoneNumber;
     private String eMailAddress;
     private long driverId;
+    private String key;
 
     public Drive()
     {
@@ -51,15 +54,15 @@ public class Drive {
     }
     public boolean compareTo(Drive d){
         if(
-        d.status == status&&
-        d.source == source&&
-        d.destination == destination&&
-        d.beginning == beginning&&
-        d.end == end&&
-                d.name.equals(name) &&
-                d.phoneNumber.equals(phoneNumber) &&
-                d.eMailAddress.equals(eMailAddress) &&
-        d.driverId == driverId)
+                d.status == status&&
+                        d.source == source&&
+                        d.destination == destination&&
+                        d.beginning == beginning&&
+                        d.end == end&&
+                        d.name.equals(name) &&
+                        d.phoneNumber.equals(phoneNumber) &&
+                        d.eMailAddress.equals(eMailAddress) &&
+                        d.driverId == driverId)
             return true;
         else return false;
     }
@@ -89,9 +92,8 @@ public class Drive {
     public void setStatus(DriveStatus status) {
         this.status = status;
     }
-    public void setDriverId(long driverId) {
-        this.driverId = driverId;
-    }
+    public void setDriverId(long driverId) { this.driverId = driverId; }
+    public void setKey(String key) { this.key = key; }
     //endregion
 
     //region gets
@@ -122,6 +124,7 @@ public class Drive {
     public long getDriverId() {
         return driverId;
     }
+    public String getKey() { return key; }
     //endregion
 
 }

@@ -18,7 +18,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.CurrentLocation;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FireBaseBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
@@ -48,11 +50,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
     private List<Drive> driveList;
     private Driver driver;
     private Filter distanceFilter;
+    private CurrentLocation currentLocation;
 
     ExpandableListAdapter(Context context, List<Drive> dataSource, Driver driver){
         this.context = context;
         this.driveList = dataSource;
         this.driver = driver;
+        currentLocation = new CurrentLocation(context);
     }
 
     @Override
@@ -107,13 +111,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         }
         // Populate the data into the template view using the data object
         viewHolder.inputName.setText(drive.getName());
-        viewHolder.numberOfKm.setText(Float.toString(AddressToLocation(drive.getSource()).distanceTo(CurrentLocation())));
+        viewHolder.numberOfKm.setText(Float.toString(AddressToLocation(drive.getSource()).distanceTo(currentLocation.currentLocation)));
         viewHolder.inputPhoneNumber.setText(drive.getPhoneNumber());
         // Return the completed view to render on screen
         return convertView;
-    }
-    private Location CurrentLocation(){
-        return driver.getCurrentLocation();
     }
 
     private Location AddressToLocation(Address address){
@@ -150,7 +151,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         else {viewHolder = (ListItemViewHolder) convertView.getTag();}
 
         viewHolder.inputSource.setText(drive.getSource().toString());
-        viewHolder.inputPrice.setText("look at the todo state!");// todo: how do we calculate the price?
+        viewHolder.inputPrice.setText(Float.toString(new FireBaseBackend().getPrice(drive.getSource(),drive.getDestination())));
         viewHolder.inputDestination.setText(drive.getDestination().toString());
 
         viewHolder.takeDrive.setOnClickListener(new View.OnClickListener() {
@@ -238,7 +239,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
                 // We perform filtering operation
                 List<Drive> nRideList = new ArrayList<Drive>();
                 for (Drive ride : driveList) {
-                    float distance = (AddressToLocation(ride.getSource()).distanceTo(driver.getCurrentLocation()));
+                    float distance = (AddressToLocation(ride.getSource()).distanceTo(currentLocation.currentLocation));
                     distance /= 100;
                     int temp = (int)(distance);
                     distance = (float)(temp) / 10;

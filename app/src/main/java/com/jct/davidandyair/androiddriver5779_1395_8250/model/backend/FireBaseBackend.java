@@ -133,6 +133,7 @@ public class FireBaseBackend implements IBackend {
         }
     }
     //endregion
+
     private float calculateDistance(Address a, Location b){
         Location locationA = new Location("A");
         Location locationB = new Location("B");
@@ -159,7 +160,10 @@ public class FireBaseBackend implements IBackend {
 
     @Override
     public void addDriver(final Driver driver) {
-      driverRef.push().setValue(driver);
+      String key =  driverRef.push().getKey();
+      driver.setKey(key);
+
+      driverRef.child(key).setValue(driver);
     }
 
     @Override
@@ -244,7 +248,7 @@ public class FireBaseBackend implements IBackend {
     public List<Drive> getDrivesByDistance(Driver driver, float distance, Action<Long> action) {
       List<Drive> driverDrives = getUnhandledDrives(null);
         for (Drive drive:driverDrives) {
-            if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)
+            /*if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)*/ //Todo
                 driverDrives.remove(drive);
         }
 
@@ -270,7 +274,7 @@ public class FireBaseBackend implements IBackend {
     public List<Drive> getDrivesByPrice(float price, Action<Long> action) {
       List<Drive> returnVal = getUnhandledDrives(null);
         for (Drive drive:returnVal) {
-            float drivePrice = calculateDistance(drive.getSource(), drive.getDestination())/1000 * 5;
+            float drivePrice = getPrice(drive.getSource(), drive.getDestination());
             if(drivePrice != price)
                 returnVal.remove(drive);
         }
@@ -330,7 +334,14 @@ public class FireBaseBackend implements IBackend {
 
     @Override
     public void updateDrive(final Drive toUpdate){
-        final String key = (toUpdate.getKey()); // todo: insert key to the entity Drive
+        final String key = toUpdate.getKey();
         drivesRef.child(key).setValue(toUpdate);
     }
+
+    @Override
+    public float getPrice(Address source, Address destination) {
+        return calculateDistance(source, destination)/1000 * 5;
+    }
+
+
 }

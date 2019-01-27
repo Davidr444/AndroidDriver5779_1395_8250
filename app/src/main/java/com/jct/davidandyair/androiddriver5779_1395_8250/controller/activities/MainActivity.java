@@ -1,5 +1,6 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -31,6 +32,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        //Load the home fragment
+        HomeFragment homeFragment = new HomeFragment();
+        loadFragment(homeFragment);
 
         /*
         //get the driver
@@ -116,11 +120,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             loadFragment(aboutUsFragment);
 
         } else if (id == R.id.nav_share) {
-            //TODO: Add Share Options
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,R.string.share_message);
+            sendIntent.setType("text/plain");
+            startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_title)));
 
         } else if (id == R.id.nav_exit) {
-            //TODO: Ask the user if he or she is sure they want to close the app
-            this.finishAffinity();
+            Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
+            //Clear all the other activities
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+            finish();
         }
 
         drawer.closeDrawer(GravityCompat.START);

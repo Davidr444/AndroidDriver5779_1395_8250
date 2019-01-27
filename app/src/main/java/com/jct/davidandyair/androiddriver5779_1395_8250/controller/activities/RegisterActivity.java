@@ -150,6 +150,7 @@ public class RegisterActivity extends AppCompatActivity {
                         //Clear all the other activities
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);
+                        finish();
                     }
                 }
         );

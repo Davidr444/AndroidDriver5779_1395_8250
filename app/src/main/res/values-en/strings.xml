@@ -37,4 +37,6 @@
     <string name="call_passenger">Call</string>
     <string name="sms_passenger">"Send message "</string>
     <string name="take_drive">Take The Drive</string>
+    <string name="share_message">I also use Get Taxi. Join me and enjoy advanced taxi services through your smartphone!</string>
+    <string name="share_title">Share Get taxi with:</string>
 </resources>

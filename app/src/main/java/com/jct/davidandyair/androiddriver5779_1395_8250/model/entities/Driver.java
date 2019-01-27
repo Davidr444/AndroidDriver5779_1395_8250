@@ -1,8 +1,5 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 
-import android.location.Address;
-import android.location.Location;
-
 import java.io.Serializable;
 
 
@@ -14,6 +11,7 @@ public class Driver implements Serializable {
     private String emailAddress;
     private int creditCardNumber;
     private String password;
+    private String key;
 
     public Driver()
     {
@@ -22,9 +20,6 @@ public class Driver implements Serializable {
         phoneNumber = null;
         emailAddress = null;
         // id and creditCardNumber are integers and they are automatically initialized with a grabage value!
-    }
-    public Location getCurrentLocation(){
-        return null; // todo: implemnt this function
     }
 
     //region gets
@@ -85,6 +80,14 @@ public class Driver implements Serializable {
     public void setPassword(String password) {
         //TODO: HASH THE PASSWORD
         this.password = password;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
     }
     //endregion
 

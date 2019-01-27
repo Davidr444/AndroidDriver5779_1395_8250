@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                              intent.putExtra("driver",dr);
                                              startActivity(intent);
+                                             finish();
                                          }
 
                                          else
