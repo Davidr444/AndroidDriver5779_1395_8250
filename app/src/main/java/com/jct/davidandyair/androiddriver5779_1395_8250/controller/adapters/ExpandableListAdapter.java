@@ -47,6 +47,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
     private Context context;
     private List<Drive> driveList;
     private Driver driver;
+    private Filter distanceFilter;
 
     ExpandableListAdapter(Context context, List<Drive> dataSource, Driver driver){
         this.context = context;
@@ -215,6 +216,44 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
 
     @Override
     public Filter getFilter() {
-        return null;
+        if(distanceFilter == null)
+            distanceFilter = new DistanceFilter();
+        return distanceFilter;
+    }
+
+    private class DistanceFilter extends Filter{
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            FilterResults results = new FilterResults();
+            // We implement here the filter logic
+            if ((constraint == null) || (constraint.length() == 0)) {
+                // No filter implemented we return all the list
+                results.values = driveList;
+                results.count = driveList.size();
+            }else if (!Character.isDigit(constraint.charAt(constraint.length()-1))){
+                results.values = driveList;
+                results.count = driveList.size();
+            }
+            else {
+                // We perform filtering operation
+                List<Drive> nRideList = new ArrayList<Drive>();
+                for (Drive ride : driveList) {
+                    float distance = (AddressToLocation(ride.getSource()).distanceTo(locationA));
+                    distance /= 100;
+                    int temp = (int)(distance);
+                    distance = (float)(temp) / 10;
+                    if (distance <= Float.valueOf(constraint.toString()))
+                        nRideList.add(ride);
+                }
+                results.values = nRideList;
+                results.count = nRideList.size();
+            }
+            return results;
+        }
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            driveList = (List<Drive>) results.values;
+            notifyDataSetChanged();
+        }
     }
 }
