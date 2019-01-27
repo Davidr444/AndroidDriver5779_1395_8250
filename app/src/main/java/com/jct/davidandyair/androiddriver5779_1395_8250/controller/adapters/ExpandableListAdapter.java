@@ -84,38 +84,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         return false;
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
         // Get the data item for this position
@@ -153,17 +121,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         return location;
     } // this function converts address to location.
 
-
-
-
-
-
-
-
-
-
-
-
     @Override
     public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
         final Drive drive = (Drive) getChild(groupPosition, childPosition);
@@ -199,7 +156,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
                 context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uri)));
                 IBackend backend = FactoryBackend.getBackend();
 
-                backend.changeStatus(Drive.DriveStatus.IN_PROGRESS);
+                backend.changeStatus(drive, Drive.DriveStatus.IN_PROGRESS);
                 drive.setBeginning(Calendar.getInstance().getTime());
                 drive.setDriverId(driverId);
 
@@ -247,23 +204,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
 
         return convertView;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {

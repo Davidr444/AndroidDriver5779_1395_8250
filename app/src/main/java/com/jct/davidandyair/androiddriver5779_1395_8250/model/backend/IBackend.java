@@ -21,6 +21,6 @@ public interface IBackend {
     List<Drive> getDrivesByDate(final Date date, final FireBaseBackend.Action<Long> action);
     List<Drive> getDrivesByPrice(final float price, final FireBaseBackend.Action<Long> action);
     List<String> getDriversNames(final FireBaseBackend.Action<Long> action);
-    void changeStatus(Drive.DriveStatus status);
+    void changeStatus(Drive drive, Drive.DriveStatus status);
     void updateDrive(final Drive toUpdate);
 }

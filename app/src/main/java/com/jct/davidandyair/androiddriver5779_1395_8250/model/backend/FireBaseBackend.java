@@ -288,10 +288,10 @@ public class FireBaseBackend implements IBackend {
       return returnVal;
   }
 
-
     @Override
-    public void changeStatus(Drive.DriveStatus status){
-        // todo: implement this function
+    public void changeStatus(Drive drive, Drive.DriveStatus status){
+        drive.setStatus(status);
+        updateDrive(drive);
     }
 
 
@@ -317,21 +317,9 @@ public class FireBaseBackend implements IBackend {
         return returnVal;
     }
 
-    @Override todo: implement this function that should let us the ability to update a drive.
+    @Override
     public void updateDrive(final Drive toUpdate){
-        notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
-            @Override
-            public void OnDataChanged(List<Drive> obj) {
-                for (Drive drive:obj) {
-                    if(drive.compareTo(toUpdate))
-
-                }
-            }
-
-            @Override
-            public void onFailure(Exception exception) {
-
-            }
-        });
+        final String key = (toUpdate.getKey()); // todo: insert key to the entity Drive
+        drivesRef.child(key).setValue(toUpdate);
     }
 }
