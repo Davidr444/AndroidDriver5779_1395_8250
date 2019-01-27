@@ -111,8 +111,10 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         // Return the completed view to render on screen
         return convertView;
     }
-    private Location CurrentLocation(){// todo: implmemtns this function.
-        return null; } // this functiong returns the current location of the phone.
+    private Location CurrentLocation(){
+        return driver.getCurrentLocation();
+    }
+
     private Location AddressToLocation(Address address){
         // this function converts address to location.
         Location location = new Location("a");

@@ -1,6 +1,7 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 
 import android.location.Address;
+import android.location.Location;
 
 import java.io.Serializable;
 
@@ -22,9 +23,8 @@ public class Driver implements Serializable {
         emailAddress = null;
         // id and creditCardNumber are integers and they are automatically initialized with a grabage value!
     }
-    public Address getAddress(){
-    //TODO: implement this function to get the address of the driver.
-        return null;
+    public Location getCurrentLocation(){
+        return null; // todo: implemnt this function
     }
 
     //region gets

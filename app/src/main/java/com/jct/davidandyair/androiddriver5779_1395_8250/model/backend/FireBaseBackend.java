@@ -133,6 +133,17 @@ public class FireBaseBackend implements IBackend {
         }
     }
     //endregion
+    private float calculateDistance(Address a, Location b){
+        Location locationA = new Location("A");
+        Location locationB = new Location("B");
+
+        locationA.setLongitude(a.getLongitude());
+        locationA.setLatitude(a.getLatitude());
+        locationB.setLongitude(b.getLongitude());
+        locationB.setLatitude(b.getLatitude());
+
+        return locationA.distanceTo(locationB);
+    }
 
     private float calculateDistance(Address a, Address b){
         Location locationA = new Location("A");
@@ -233,7 +244,7 @@ public class FireBaseBackend implements IBackend {
     public List<Drive> getDrivesByDistance(Driver driver, float distance, Action<Long> action) {
       List<Drive> driverDrives = getUnhandledDrives(null);
         for (Drive drive:driverDrives) {
-            //if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)//todo: implemnt getCurrentLocation that return adddress in the driver class.
+            if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)
                 driverDrives.remove(drive);
         }
 
