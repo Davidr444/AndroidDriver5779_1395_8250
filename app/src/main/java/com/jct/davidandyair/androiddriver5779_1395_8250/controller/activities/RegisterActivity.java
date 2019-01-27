@@ -29,9 +29,6 @@ public class RegisterActivity extends AppCompatActivity {
     private Driver driver;
     private AsyncTask<Driver, Driver, Driver> asyncTask;
 
-    //TODO:is it necessary?
-    public RegisterActivity() {
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -21,6 +21,7 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -45,12 +46,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
 
     private Context context;
     private List<Drive> driveList;
-    private long driverId;
+    private Driver driver;
 
-    ExpandableListAdapter(Context context, List<Drive> dataSource, long driverId){
+    ExpandableListAdapter(Context context, List<Drive> dataSource, Driver driver){
         this.context = context;
         this.driveList = dataSource;
-        this.driverId = driverId;
+        this.driver = driver;
     }
 
     @Override
@@ -146,7 +147,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         else {viewHolder = (ListItemViewHolder) convertView.getTag();}
 
         viewHolder.inputSource.setText(drive.getSource().toString());
-        viewHolder.inputPrice.setText("look at the todo state!");// todo: how we calculate the price)
+        viewHolder.inputPrice.setText("look at the todo state!");// todo: how do we calculate the price?
         viewHolder.inputDestination.setText(drive.getDestination().toString());
 
         viewHolder.takeDrive.setOnClickListener(new View.OnClickListener() {
@@ -158,7 +159,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
 
                 backend.changeStatus(drive, Drive.DriveStatus.IN_PROGRESS);
                 drive.setBeginning(Calendar.getInstance().getTime());
-                drive.setDriverId(driverId);
+                drive.setDriverId(driver.getId());
 
                 new AsyncTask<Void, Void, Void>(){
                     @Override
