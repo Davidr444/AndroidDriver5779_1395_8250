@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -28,6 +30,9 @@ public class RegisterActivity extends AppCompatActivity {
     private IBackend backend;
     private Driver driver;
     private AsyncTask<Driver, Driver, Driver> asyncTask;
+    Animation animBlink;
+    Animation animTranslate;
+
 
 
     @Override
@@ -36,6 +41,20 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         findViews();
+        doAnimation();
+    }
+
+    private void doAnimation()
+    {
+        animBlink = AnimationUtils.loadAnimation(this, R.anim.anim_blink);
+        fName.startAnimation(animBlink);
+        lName.startAnimation(animBlink);
+        id.startAnimation(animBlink);
+        phoneNumber.startAnimation(animBlink);
+        emailAddress.startAnimation(animBlink);
+        creditCardNumber.startAnimation(animBlink);
+        password.startAnimation(animBlink);
+        button.startAnimation(animBlink);
     }
 
 
@@ -46,39 +65,47 @@ public class RegisterActivity extends AppCompatActivity {
     private Boolean checkDetailsIntegrity()
     {
         Boolean formIsComplete = true;
+        animTranslate = AnimationUtils.loadAnimation(this,R.anim.anim_translate);
         if(TextUtils.isEmpty(fName.getText()))
         {
             fName.setError(getText(R.string.empty_field));
+            fName.startAnimation(animTranslate);
             formIsComplete = false;
         }
         if(TextUtils.isEmpty(lName.getText()))
         {
             lName.setError(getText(R.string.empty_field));
+            lName.startAnimation(animTranslate);
             formIsComplete = false;
         }
         if(TextUtils.isEmpty(id.getText()))
         {
             id.setError(getText(R.string.empty_field));
+            id.startAnimation(animTranslate);
             formIsComplete = false;
         }
         if(TextUtils.isEmpty(phoneNumber.getText()))
         {
             phoneNumber.setError(getText(R.string.empty_field));
+            phoneNumber.startAnimation(animTranslate);
             formIsComplete = false;
         }
         if(TextUtils.isEmpty(emailAddress.getText()))
         {
             emailAddress.setError(getText(R.string.empty_field));
+            emailAddress.startAnimation(animTranslate);
             formIsComplete = false;
         }
         if(TextUtils.isEmpty(creditCardNumber.getText()))
         {
             creditCardNumber.setError(getText(R.string.empty_field));
+            creditCardNumber.startAnimation(animTranslate);
             formIsComplete = false;
         }
         if(TextUtils.isEmpty(password.getText()))
         {
             password.setError(getText(R.string.empty_field));
+            password.startAnimation(animTranslate);
             formIsComplete = false;
         }
         //If one of the fields is empty
@@ -133,7 +160,8 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        checkDetailsIntegrity();
+                        if(!checkDetailsIntegrity())
+                            return;
 
                         driver = new Driver();
 
