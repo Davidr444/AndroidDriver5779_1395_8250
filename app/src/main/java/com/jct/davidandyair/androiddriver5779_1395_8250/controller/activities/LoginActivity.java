@@ -32,7 +32,6 @@ public class LoginActivity extends AppCompatActivity {
     @Nullable
     private Driver checkIdentity(String mail, String p){
         List<Driver> drivers = backend.getDrivers(null);
-
         for (Driver driver:drivers) {
             if(driver.getEmailAddress().equals(mail) && driver.getPassword().equals(p))
                 return driver;

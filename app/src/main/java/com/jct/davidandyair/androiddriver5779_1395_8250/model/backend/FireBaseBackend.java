@@ -48,7 +48,7 @@ public class FireBaseBackend implements IBackend {
     private static ChildEventListener driversRefChildEventListener;
     private static FirebaseDatabase database = FirebaseDatabase.getInstance();
     private static DatabaseReference driverRef = database.getReference("Drivers");
-    private static DatabaseReference drivesRef = database.getReference("Drives");
+    private static DatabaseReference drivesRef = database.getReference("drives");
     //endregion
 
     //region Notify Functions
