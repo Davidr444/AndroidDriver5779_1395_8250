@@ -65,7 +65,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Boolean checkDetailsIntegrity()
     {
         Boolean formIsComplete = true;
-        animTranslate = AnimationUtils.loadAnimation(this,R.anim.anim_translate);
+        animTranslate = AnimationUtils.loadAnimation(this,R.anim.anim_scale);
         if(TextUtils.isEmpty(fName.getText()))
         {
             fName.setError(getText(R.string.empty_field));
