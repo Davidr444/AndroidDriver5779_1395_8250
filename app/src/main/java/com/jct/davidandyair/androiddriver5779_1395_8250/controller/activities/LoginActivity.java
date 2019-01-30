@@ -86,7 +86,7 @@ public class LoginActivity extends AppCompatActivity {
                                          Driver dr = checkIdentity(mail, password); // dr is the driver who logged in
                                          if (dr != null)
                                          {
-                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                                              //Clear all the other activities
                                              intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                              intent.putExtra("driver",dr);

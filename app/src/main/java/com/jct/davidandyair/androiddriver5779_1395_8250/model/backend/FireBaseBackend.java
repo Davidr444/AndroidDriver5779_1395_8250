@@ -51,6 +51,21 @@ public class FireBaseBackend implements IBackend {
     private static DatabaseReference drivesRef = database.getReference("drives");
     //endregion
 
+    public FireBaseBackend()
+    {
+        notifyToDriverList(new NotifyDataChange<List<Driver>>() {
+            @Override
+            public void OnDataChanged(List<Driver> obj) {
+                drivers = obj;
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+        });
+    }
+
     //region Notify Functions
     private void notifyToDrivesList(final NotifyDataChange<List<Drive>> notifyDataChange){
         if (notifyDataChange != null)
@@ -284,23 +299,8 @@ public class FireBaseBackend implements IBackend {
 
     @Override
     public List<Driver> getDrivers(final Action<Long> action){
-      final List<Driver> returnVal = new ArrayList<Driver>();
-      notifyToDriverList(new NotifyDataChange<List<Driver>>() {
-          @Override
-          public void OnDataChanged(List<Driver> obj) {
-              drivers = obj;
-              for (Driver driver:drivers) {
-                  returnVal.add(driver);
-              }
-          }
 
-          @Override
-          public void onFailure(Exception exception) {
-
-          }
-      });
-
-      return returnVal;
+        return drivers;
   }
 
     @Override

@@ -33,8 +33,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         //Load the home fragment
-        HomeFragment homeFragment = new HomeFragment();
-        loadFragment(homeFragment);
+        //HomeFragment homeFragment = new HomeFragment();
+       // loadFragment(homeFragment);
 
         /*
         //get the driver
