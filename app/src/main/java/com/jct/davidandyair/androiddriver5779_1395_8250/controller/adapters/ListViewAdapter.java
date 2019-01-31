@@ -1,64 +1,153 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller.adapters;
 
+import android.content.ContentProviderOperation;
+import android.content.ContentProviderResult;
+import android.content.Context;
+import android.content.OperationApplicationException;
+import android.location.Address;
+import android.location.Location;
+import android.net.Uri;
+import android.os.RemoteException;
+import android.provider.ContactsContract;
+import android.support.design.widget.FloatingActionButton;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class ListViewAdapter extends BaseExpandableListAdapter implements Filterable {
+import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ListViewAdapter extends BaseAdapter{
+    private class ViewHolder{
+        private FloatingActionButton addContacts;
+        private TextView payment, endDrive;
+    }
+    private Location AddressToLocation(Address address){
+        // this function converts address to location.
+        Location location = new Location("a");
+        location.setLatitude(address.getLatitude());
+        location.setLongitude(address.getLongitude());
+
+        return location;
+    } // this function converts address to location.
+    private Location currentLocation(Location location){return null;}// todo: implement this function like getPlace in BD's project
+
+    private static List<Drive> drives;
+    Context context;
+
+    public ListViewAdapter(List<Drive> drives, Context context){
+        this.drives = drives;
+        this.context = context;
+    }
+
     @Override
-    public int getGroupCount() {
+    public int getCount() {
+        return drives.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return drives.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
         return 0;
     }
 
     @Override
-    public int getChildrenCount(int groupPosition) {
-        return 0;
-    }
+    public View getView(int position, View convertView, ViewGroup parent) {
+        final ViewHolder viewHolder;
+        final Drive drive = drives.get(position);
+        if (convertView == null) {
+            viewHolder = new ViewHolder();
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = inflater.inflate(R.layout.finish_ride_item, null, true);
+            viewHolder.endDrive = (TextView) convertView.findViewById(R.id.endDriveInput);
+            viewHolder.payment = (TextView) convertView.findViewById(R.id.paymentInput);
+            viewHolder.addContacts = (FloatingActionButton) convertView.findViewById(R.id.AddContacts);
+            convertView.setTag(viewHolder);
+        } else {
+            viewHolder = (ViewHolder) convertView.getTag();
+        }
+        viewHolder.endDrive.setText(drive.getDestination().toString());
+        float payment = AddressToLocation(drive.getSource()).distanceTo(AddressToLocation(drive.getDestination()));
+        payment /= 100;
+        int temp = (int) payment;
+        payment = (float) (temp) / 10;
+        viewHolder.payment.setText(String.valueOf(payment) + context.getString(R.string.shekel));// todo: we need to add shekel
+        viewHolder.addContacts.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+                int rawContactInsertIndex = ops.size();
+                ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+                        .withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+                        .withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
+                        .build());
+                //INSERT NAME
+                ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactInsertIndex)
+                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+                        .withValue(ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME, drive.getName()) // Name of the person
+                        .build());
+                //INSERT PHONE MOBILE
+                ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactInsertIndex)
+                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+                        .withValue(ContactsContract.CommonDataKinds.Phone.NUMBER, drive.getPhoneNumber()) // Number of the person
+                        .withValue(ContactsContract.CommonDataKinds.Phone.TYPE, ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE)
+                        .build()); //
+                //INSERT EMAIL
+                ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactInsertIndex)
+                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+                        .withValue(ContactsContract.CommonDataKinds.Email.DATA, drive.geteMailAddress())
+                        .withValue(ContactsContract.CommonDataKinds.Email.TYPE, ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+                        .build()); //
+                //INSERT ADDRESS: FULL
+                ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
+                        .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactInsertIndex)
+                        .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
+                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS, currentLocation(AddressToLocation(drive.getSource())))
+                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.TYPE, ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
+                        .build());
+                // SAVE CONTACT IN BCR Structure
+                Uri newContactUri = null;
+                //PUSH EVERYTHING TO CONTACTS
+                try {
+                    ContentProviderResult[] res = context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
+                    if (res != null && res[0] != null) {
+                        newContactUri = res[0].uri;
+                    } else Toast.makeText(context, "Contact not added.", Toast.LENGTH_LONG).show();
+                } catch (RemoteException e) {
+                    // error
+                    Toast.makeText(context, "Error (1) adding contact.", Toast.LENGTH_LONG).show();
+                    newContactUri = null;
+                } catch (OperationApplicationException e) {
+                    // error
+                    Toast.makeText(context, "Error (2) adding contact.", Toast.LENGTH_LONG).show();
+                    newContactUri = null;
+                }
+                Toast.makeText(context, "Contact added to system contacts.", Toast.LENGTH_LONG).show();
 
-    @Override
-    public Object getGroup(int groupPosition) {
-        return null;
-    }
+                if (newContactUri == null) {
+                    Toast.makeText(context, "Error creating contact", Toast.LENGTH_LONG);
 
-    @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return null;
-    }
+                }
 
-    @Override
-    public long getGroupId(int groupPosition) {
-        return 0;
-    }
+            }
+        });
 
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return 0;
-    }
-
-    @Override
-    public boolean hasStableIds() {
-        return false;
-    }
-
-    @Override
-    public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        return null;
-    }
-
-    @Override
-    public boolean isChildSelectable(int groupPosition, int childPosition) {
-        return false;
-    }
-
-    @Override
-    public Filter getFilter() {
-        return null;
+        return convertView;
     }
 }
