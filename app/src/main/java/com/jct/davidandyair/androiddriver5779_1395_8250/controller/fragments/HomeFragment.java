@@ -25,7 +25,7 @@ public class HomeFragment extends Fragment {
         //Display the driver name
         name = mainActivity.driver.getFirstName();
         nameTextView = view.findViewById(R.id.welcome_driver);
-        nameTextView.setText(name + R.string.welcome_driver);
+        nameTextView.setText(name + getString(R.string.welcome_driver));
 
         return view;
     }
