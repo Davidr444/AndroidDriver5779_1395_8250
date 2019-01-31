@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
+import android.view.Window;
 import android.widget.ImageView;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
@@ -14,6 +15,7 @@ public class OpeningActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setContentView(R.layout.activity_opening);
 
         ImageView imageView = (ImageView)findViewById(R.id.animImage);

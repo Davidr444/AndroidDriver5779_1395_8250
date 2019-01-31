@@ -43,4 +43,6 @@
     <string name="share_message">I also use Get Taxi. Join me and enjoy advanced taxi services through your smartphone!</string>
     <string name="share_title">Share Get taxi with:</string>
     <string name="welcome_driver">, welcome!</string>
+    <string name="there_are_currently">There are currently</string>
+    <string name="drives_available">drives available</string>
 </resources>

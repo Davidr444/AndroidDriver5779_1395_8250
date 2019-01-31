@@ -51,12 +51,24 @@ public class FireBaseBackend implements IBackend {
     private static DatabaseReference drivesRef = database.getReference("drives");
     //endregion
 
+    //Constructor - Important
     public FireBaseBackend()
     {
         notifyToDriverList(new NotifyDataChange<List<Driver>>() {
             @Override
             public void OnDataChanged(List<Driver> obj) {
                 drivers = obj;
+            }
+
+            @Override
+            public void onFailure(Exception exception) {
+
+            }
+        });
+        notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
+            @Override
+            public void OnDataChanged(List<Drive> obj) {
+                drives = obj;
             }
 
             @Override
@@ -183,66 +195,35 @@ public class FireBaseBackend implements IBackend {
 
     @Override
     public List<Drive> getUnhandledDrives(Action<Long> action){
-      boolean flag = true;
-      notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
-          @Override
-          public void OnDataChanged(List<Drive> notifyDrive) {
-              drives = notifyDrive;
-              for (Drive drive:drives) {
-                  if(drive.getStatus() != Drive.DriveStatus.AVAILABLE)
-                      drives.remove(drive);
-              }
-          }
+      List<Drive> unhandledDrives = new ArrayList<>();
+        for (Drive drive:drives) {
+            if(drive.getStatus() == Drive.DriveStatus.AVAILABLE)
+                unhandledDrives.add(drive);
+        }
 
-          @Override
-          public void onFailure(Exception exception) {
-
-          }
-      });
-
-      return drives;
+      return unhandledDrives;
     }
 
     @Override
     public List<Drive> getFinishedDrives(Action<Long> action) {
-      notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
-          @Override
-          public void OnDataChanged(List<Drive> notifyDrives) {
-              drives = notifyDrives;
-              for (Drive drive:drives) {
-                  if(drive.getStatus() != Drive.DriveStatus.FINISHED)
-                      drives.remove(drive);
-              }
-          }
+        List<Drive> finishedDrives = new ArrayList<>();
+        for (Drive drive:drives) {
+            if(drive.getStatus() == Drive.DriveStatus.FINISHED)
+                finishedDrives.add(drive);
+        }
 
-          @Override
-          public void onFailure(Exception exception) {
-
-          }
-      });
-
-      return drives;
+        return finishedDrives;
     }
 
     @Override
     public List<Drive> getDriversDrives(final Driver driver, Action<Long> action) {
-      notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
-          @Override
-          public void OnDataChanged(List<Drive> obj) {
-              drives = obj;
-              for (Drive drive:drives ) {
-                  if(driver.getId() != drive.getDriverId())
-                      drives.remove(drive);
-              }
-          }
 
-          @Override
-          public void onFailure(Exception exception) {
-
-          }
-      });
-
-      return drives;
+        List<Drive> driverDrives = new ArrayList<>();
+        for (Drive drive:drives) {
+            if(driver.getId() != drive.getDriverId())
+                driverDrives.add(drive);
+        }
+        return driverDrives;
     }
 
     @Override
@@ -301,7 +282,7 @@ public class FireBaseBackend implements IBackend {
     public List<Driver> getDrivers(final Action<Long> action){
 
         return drivers;
-  }
+    }
 
     @Override
     public void changeStatus(Drive drive, Drive.DriveStatus status){
@@ -312,24 +293,14 @@ public class FireBaseBackend implements IBackend {
 
     @Override
     public List<String> getDriversNames(final Action<Long> action){
-        final List<String> returnVal = new ArrayList<String>();
-        notifyToDriverList(new NotifyDataChange<List<Driver>>() {
-            @Override
-            public void OnDataChanged(List<Driver> obj) {
-                drivers = obj;
-                for (Driver driver:drivers) {
-                    String fullName = driver.getFirstName() + " " + driver.getLastName();
-                    returnVal.add(fullName);
-                }
-            }
+        final List<String> driversNames = new ArrayList<String>();
 
-            @Override
-            public void onFailure(Exception exception) {
+        for (Driver driver:drivers) {
+            String fullName = driver.getFirstName() + " " + driver.getLastName();
+            driversNames.add(fullName);
+        }
 
-            }
-        });
-
-        return returnVal;
+        return driversNames;
     }
 
     @Override

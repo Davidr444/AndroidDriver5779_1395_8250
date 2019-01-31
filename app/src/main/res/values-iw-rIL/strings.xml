@@ -40,4 +40,6 @@
     <string name="share_message">גם אני משתמש בגט טקסי. הצטרף אלי ותהנה משירותי מוניות מתקדמים דרך הסמארטפון!</string>
     <string name="share_title">שתף את גט טקסי באמצעות:</string>
     <string name="welcome_driver">" ,ברוך הבא!"</string>
+    <string name="there_are_currently">כרגע ישנם</string>
+    <string name="drives_available">נסיעות זמינות</string>
 </resources>

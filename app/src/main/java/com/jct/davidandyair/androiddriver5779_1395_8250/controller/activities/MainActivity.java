@@ -42,9 +42,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = getIntent();
         driver = (Driver)intent.getSerializableExtra("driver");
 
-        //set the menu header to the driver name
-        TextView driverName = (TextView)findViewById(R.id.driver_name);
-       // driverName.setText(driver.getFirstName()+" " + driver.getLastName());
 
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -80,6 +77,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
+        //set the menu header to the driver name
+        TextView driverName = (TextView)findViewById(R.id.driver_name);
+        TextView driverMail = (TextView) findViewById(R.id.drivermail);
+        driverName.setText(driver.getFirstName()+" " + driver.getLastName());
+        driverMail.setText(driver.getEmailAddress());
         return true;
     }
 
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (id == R.id.nav_share) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
-            sendIntent.putExtra(Intent.EXTRA_TEXT,R.string.share_message);
+            sendIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_message));
             sendIntent.setType("text/plain");
             startActivity(Intent.createChooser(sendIntent, getResources().getText(R.string.share_title)));
 
