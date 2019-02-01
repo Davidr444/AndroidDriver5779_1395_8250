@@ -14,14 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.BaseExpandableListAdapter;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,15 +37,18 @@ public class ListViewAdapter extends BaseAdapter{
 
         return location;
     } // this function converts address to location.
-    private Location currentLocation(Location location){return null;}// todo: implement this function like getPlace in BD's project
 
     private static List<Drive> drives;
-    Context context;
+    private Context context;
+    private Driver driver;
 
-    public ListViewAdapter(List<Drive> drives, Context context){
+    public ListViewAdapter(List<Drive> drives, Context context, Driver driver){
         this.drives = drives;
         this.context = context;
+        this.driver = driver;
     }
+
+    private Location getPlace(Location location) {return null;}// todo: implement this function like BD's project
 
     @Override
     public int getCount() {
@@ -81,10 +82,10 @@ public class ListViewAdapter extends BaseAdapter{
         }
         viewHolder.endDrive.setText(drive.getDestination().toString());
         float payment = AddressToLocation(drive.getSource()).distanceTo(AddressToLocation(drive.getDestination()));
-        payment /= 100;
+        payment /= 100;// todo: check whether this is our payment formula
         int temp = (int) payment;
         payment = (float) (temp) / 10;
-        viewHolder.payment.setText(String.valueOf(payment) + context.getString(R.string.shekel));// todo: we need to add shekel
+        viewHolder.payment.setText(String.valueOf(payment) + context.getString(R.string.shekel));
         viewHolder.addContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,7 +119,7 @@ public class ListViewAdapter extends BaseAdapter{
                 ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                         .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactInsertIndex)
                         .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS, currentLocation(AddressToLocation(drive.getSource())))
+                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS, getPlace(AddressToLocation(drive.getSource())))
                         .withValue(ContactsContract.CommonDataKinds.StructuredPostal.TYPE, ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
                         .build());
                 // SAVE CONTACT IN BCR Structure
