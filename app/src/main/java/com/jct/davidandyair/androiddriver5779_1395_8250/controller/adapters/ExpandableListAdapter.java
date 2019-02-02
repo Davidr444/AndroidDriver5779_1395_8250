@@ -52,7 +52,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
     private Filter distanceFilter;
     private CurrentLocation currentLocation;
 
-    ExpandableListAdapter(Context context, List<Drive> dataSource, Driver driver){
+    public ExpandableListAdapter(Context context, List<Drive> dataSource, Driver driver){
         this.context = context;
         this.driveList = dataSource;
         this.driver = driver;

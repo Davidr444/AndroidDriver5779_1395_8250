@@ -6,17 +6,34 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ExpandableListView;
+import android.widget.ListView;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.controller.adapters.ExpandableListAdapter;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
+
+import java.util.List;
 
 public class OrdersFragment extends Fragment {
     View view;
-    IBackend backend;
+    ExpandableListView list;
+    List<Drive> ordersList;
+    ExpandableListAdapter adapter;
+    Driver driver;
+
+    //todo: build the constructor
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_orders,container,false);
+        view = inflater.inflate(R.layout.fragment_orders, container,false);
+        list = (ExpandableListView) view.findViewById(R.id.orders_list_view);
+        ordersList = FactoryBackend.getBackend().getUnhandledDrives(null);
+        adapter = new ExpandableListAdapter(getContext(), ordersList, driver);
+        list.setAdapter(adapter);
         return view;
     }
 }

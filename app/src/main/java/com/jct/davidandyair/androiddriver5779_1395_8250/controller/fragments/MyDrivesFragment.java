@@ -29,7 +29,7 @@ public class MyDrivesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_drives, container, false);
-        finishedDrivesListView = (ListView) view.findViewById(0);// todo: we need to design the fragment so that it will include a List view that will be connceted to our list by the adapter next line.
+        finishedDrivesListView = (ListView) view.findViewById(R.id.List_View);
         finishedDrives = FactoryBackend.getBackend().getFinishedDrives(null);
         listViewAdapter = new ListViewAdapter(finishedDrives, getContext(), driver);
         finishedDrivesListView.setAdapter(listViewAdapter);
