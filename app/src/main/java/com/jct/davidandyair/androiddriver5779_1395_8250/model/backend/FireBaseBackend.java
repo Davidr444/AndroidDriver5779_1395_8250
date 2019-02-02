@@ -113,7 +113,7 @@ public class FireBaseBackend implements IBackend {
             drivesRef.addChildEventListener(drivesRefChildEventListener);
         }
     }
-    private void notifyToDriverList(final NotifyDataChange<List<Driver>> notifyDataChange){
+    public void notifyToDriverList(final NotifyDataChange<List<Driver>> notifyDataChange){
         if (notifyDataChange != null)
         {
             if (driversRefChildEventListener != null)
@@ -244,7 +244,7 @@ public class FireBaseBackend implements IBackend {
     public List<Drive> getDrivesByDistance(Driver driver, float distance, Action<Long> action) {
       List<Drive> driverDrives = getUnhandledDrives(null);
         for (Drive drive:driverDrives) {
-            /*if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)*/ //Todo
+            /*if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)*/ //DAVID: Todo. YAIR: I DONT UNDERSTAND WHAT NEEDED TO BE DONE?
                 driverDrives.remove(drive);
         }
 

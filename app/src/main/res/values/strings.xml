@@ -46,4 +46,6 @@
     <string name="there_are_currently">There are currently</string>
     <string name="drives_available">drives available</string>
     <string name="shekel">SHEKEL</string>
+    <string name="payment">payment</string>
+    <string name="end_drive">end drive</string>
 </resources>
