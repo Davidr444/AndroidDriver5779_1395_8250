@@ -84,6 +84,4 @@ public class CurrentLocation {
             }
         }
     }
-
-    static public
 }
