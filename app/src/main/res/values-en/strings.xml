@@ -42,4 +42,10 @@
     <string name="welcome_driver">, welcome!</string>
     <string name="there_are_currently">There are currently</string>
     <string name="drives_available">drives available</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_orders">Orders</string>
+    <string name="nav_my_drives">My Drives</string>
+    <string name="nav_about_us">About Us</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_log_off">Log off</string>
 </resources>

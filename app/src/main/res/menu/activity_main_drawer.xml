@@ -7,31 +7,31 @@
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home_black_24dp"
-            android:title="Home" />
+            android:title="@string/nav_home" />
         <item
             android:id="@+id/nav_orders"
             android:icon="@drawable/ic_directions_car_black_24dp"
-            android:title="Orders" />
+            android:title="@string/nav_orders" />
         <item
             android:id="@+id/nav_my_drives"
             android:icon="@drawable/ic_local_grocery_store_black_24dp"
-            android:title="My Drives" />
+            android:title="@string/nav_my_drives" />
     </group>
 
-    <item android:title="Communicate">
+    <item android:title="מה לכתוב פה?">
         <menu>
             <item
                 android:id="@+id/nav_about"
                 android:icon="@drawable/ic_info_black_24dp"
-                android:title="About Us" />
+                android:title="@string/nav_about_us" />
             <item
                 android:id="@+id/nav_share"
                 android:icon="@drawable/ic_menu_share"
-                android:title="Share" />
+                android:title="@string/nav_share" />
             <item
                 android:id="@+id/nav_exit"
                 android:icon="@drawable/ic_close_black_24dp"
-                android:title="Exit" />
+                android:title="@string/nav_log_off" />
         </menu>
     </item>
 

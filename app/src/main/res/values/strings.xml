@@ -48,4 +48,10 @@
     <string name="shekel">SHEKEL</string>
     <string name="payment">payment</string>
     <string name="end_drive">end drive</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_orders">Orders</string>
+    <string name="nav_my_drives">My Drives</string>
+    <string name="nav_about_us">About Us</string>
+    <string name="nav_share">Share</string>
+    <string name="nav_log_off">Log off</string>
 </resources>
