@@ -115,11 +115,12 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         }
         // Populate the data into the template view using the data object
         viewHolder.inputName.setText(drive.getName());
-        float temp = AddressToLocation(drive.getSource()).distanceTo(currentLocation.currentLocation);
+        float temp = AddressToLocation(drive.getSource()).distanceTo(currentLocation.currentLocation) / 100;
         int t = (int) temp;
         viewHolder.numberOfKm.setText(String.valueOf(t));
         viewHolder.inputPhoneNumber.setText(drive.getPhoneNumber());
         // Return the completed view to render on screen
+
         return convertView;
     }
 
@@ -156,9 +157,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         }
         else {viewHolder = (ListItemViewHolder) convertView.getTag();}
 
-        viewHolder.inputSource.setText(drive.getSource().toString());
-        viewHolder.inputPrice.setText(Float.toString(new FireBaseBackend().getPrice(drive.getSource(),drive.getDestination())));
-        viewHolder.inputDestination.setText(drive.getDestination().toString());
+        viewHolder.inputSource.setText(CurrentLocation.getPlace(AddressToLocation(drive.getSource()),context));
+        float temp = new FireBaseBackend().getPrice(drive.getSource(),drive.getDestination());
+        int t = (int) temp;
+        viewHolder.inputPrice.setText(String.valueOf(t));
+        viewHolder.inputDestination.setText(CurrentLocation.getPlace(AddressToLocation(drive.getDestination()),context));
 
         viewHolder.takeDrive.setOnClickListener(new View.OnClickListener() {
             @Override

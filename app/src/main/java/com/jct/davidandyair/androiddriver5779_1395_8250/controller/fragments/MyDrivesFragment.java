@@ -33,7 +33,7 @@ public class MyDrivesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_drives, container, false);
         finishedDrivesListView = (ListView) view.findViewById(R.id.List_View);
-        finishedDrives = FactoryBackend.getBackend().getUnhandledDrives(null);
+        finishedDrives = FactoryBackend.getBackend().getDriversDrives(driver, null);// todo: check
         listViewAdapter = new ListViewAdapter(finishedDrives, getContext(), driver);
         finishedDrivesListView.setAdapter(listViewAdapter);
 

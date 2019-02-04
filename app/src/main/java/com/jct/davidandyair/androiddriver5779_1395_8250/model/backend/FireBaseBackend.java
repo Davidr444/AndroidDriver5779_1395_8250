@@ -244,7 +244,7 @@ public class FireBaseBackend implements IBackend {
 
         List<Drive> driverDrives = new ArrayList<>();
         for (Drive drive:drives) {
-            if(driver.getId() != drive.getDriverId())
+            if(driver.getId() == drive.getDriverId())
                 driverDrives.add(drive);
         }
         return driverDrives;
