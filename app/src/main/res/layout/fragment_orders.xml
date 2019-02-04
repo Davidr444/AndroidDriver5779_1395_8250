@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/background"
     android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/FilterText"
         android:layout_width="match_parent"
-        android:shadowColor="@color/colorAccent"
-        android:layout_height="30dp" />
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal"
+        android:drawableLeft="@drawable/ic_search_black_24dp"
+        android:hint="@string/filter"
+        android:iconifiedByDefault="false"/>
 
     <ExpandableListView
         android:id="@+id/orders_list_view"
