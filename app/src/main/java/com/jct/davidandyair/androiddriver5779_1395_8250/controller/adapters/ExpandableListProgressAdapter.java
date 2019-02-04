@@ -1,3 +1,4 @@
+/*todo: check if the project works without this file
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller.adapters;
 
 import android.content.Context;
@@ -80,3 +81,4 @@ public class ExpandableListProgressAdapter extends BaseExpandableListAdapter imp
         return null;
     }
 }
+*/

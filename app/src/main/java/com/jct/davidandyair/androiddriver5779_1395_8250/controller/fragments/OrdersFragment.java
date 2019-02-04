@@ -1,5 +1,6 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 import java.util.List;
 
+@SuppressLint("ValidFragment")
 public class OrdersFragment extends Fragment {
     View view;
     ExpandableListView list;
@@ -25,7 +27,9 @@ public class OrdersFragment extends Fragment {
     ExpandableListAdapter adapter;
     Driver driver;
 
-    //todo: build the constructor
+    public OrdersFragment(Driver driver){
+        this.driver = driver;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
@@ -34,6 +38,7 @@ public class OrdersFragment extends Fragment {
         ordersList = FactoryBackend.getBackend().getUnhandledDrives(null);
         adapter = new ExpandableListAdapter(getContext(), ordersList, driver);
         list.setAdapter(adapter);
+
         return view;
     }
 }

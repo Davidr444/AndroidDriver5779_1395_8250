@@ -1,5 +1,6 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments;
 
+import android.annotation.SuppressLint;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,13 +17,15 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressLint("ValidFragment")
 public class MyDrivesFragment extends Fragment {
     View view;
     public static List<Drive> finishedDrives = new ArrayList<>();
     ListView finishedDrivesListView;
     ListViewAdapter listViewAdapter;
     Driver driver;
-    public void getIntance(Driver driver) {
+
+    public MyDrivesFragment(Driver driver){
         this.driver = driver;
     }
 
@@ -30,7 +33,7 @@ public class MyDrivesFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_my_drives, container, false);
         finishedDrivesListView = (ListView) view.findViewById(R.id.List_View);
-        finishedDrives = FactoryBackend.getBackend().getFinishedDrives(null);
+        finishedDrives = FactoryBackend.getBackend().getUnhandledDrives(null);
         listViewAdapter = new ListViewAdapter(finishedDrives, getContext(), driver);
         finishedDrivesListView.setAdapter(listViewAdapter);
 
