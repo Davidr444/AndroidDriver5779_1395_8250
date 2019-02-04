@@ -17,7 +17,7 @@ public interface IBackend {
     List<Drive> getFinishedDrives(final FireBaseBackend.Action<Long> action);
     List<Drive> getDriversDrives(final Driver d, final FireBaseBackend.Action<Long> action);
     List<Drive> getDrivesByCity(Address address, final FireBaseBackend.Action<Long> action);
-    List<Drive> getDrivesByDistance(final Driver d, final float distance, final FireBaseBackend.Action<Long> action);
+    List<Drive> getDrivesByDistance(final Driver d, final float distance, Address currentLoaction, final FireBaseBackend.Action<Long> action);
     List<Drive> getDrivesByDate(final Date date, final FireBaseBackend.Action<Long> action);
     List<Drive> getDrivesByPrice(final float price, final FireBaseBackend.Action<Long> action);
     List<String> getDriversNames(final FireBaseBackend.Action<Long> action);

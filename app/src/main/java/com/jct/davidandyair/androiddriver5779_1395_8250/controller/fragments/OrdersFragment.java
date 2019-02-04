@@ -25,7 +25,6 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 import java.util.ArrayList;
 import java.util.List;
 
-@SuppressLint("ValidFragment")
 public class OrdersFragment extends Fragment {
     View view;
     public static ExpandableListAdapter listAdapter;
@@ -34,7 +33,8 @@ public class OrdersFragment extends Fragment {
     private ExpandableListView listView;
     public static List<Drive> driveList = new ArrayList<Drive>();
 
-    public OrdersFragment(Driver driver){this.driver = driver;}
+    public void getInstance(Driver driver){this.driver = driver;}
+    public OrdersFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)

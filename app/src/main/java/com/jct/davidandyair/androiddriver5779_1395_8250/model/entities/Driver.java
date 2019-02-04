@@ -78,7 +78,6 @@ public class Driver implements Serializable {
     }
 
     public void setPassword(String password) {
-        //TODO: HASH THE PASSWORD
         this.password = password;
     }
 

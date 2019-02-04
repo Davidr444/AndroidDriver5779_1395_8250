@@ -1,8 +1,8 @@
 package com.jct.davidandyair.androiddriver5779_1395_8250.controller.fragments;
 
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +12,6 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.controller.activities.MainActivity;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
-import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 public class HomeFragment extends Fragment {
     View view;

@@ -240,11 +240,13 @@ public class FireBaseBackend implements IBackend {
         return cityDrives;
     }
 
+
+
     @Override
-    public List<Drive> getDrivesByDistance(Driver driver, float distance, Action<Long> action) {
+    public List<Drive> getDrivesByDistance(Driver driver, float distance, Address currentLocation, Action<Long> action) {
       List<Drive> driverDrives = getUnhandledDrives(null);
         for (Drive drive:driverDrives) {
-            /*if(calculateDistance(drive.getSource(), driver.getCurrentLocation()) >= distance)*/ //DAVID: Todo. YAIR: I DONT UNDERSTAND WHAT NEEDED TO BE DONE?
+            if(calculateDistance(drive.getSource(), currentLocation) >= distance)
                 driverDrives.remove(drive);
         }
 

@@ -107,7 +107,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_orders) {
-            OrdersFragment ordersFragment = new OrdersFragment(driver);
+            OrdersFragment ordersFragment = new OrdersFragment();
+            ordersFragment.getInstance(driver);
             loadFragment(ordersFragment);
 
         } else if (id == R.id.nav_my_drives) {
