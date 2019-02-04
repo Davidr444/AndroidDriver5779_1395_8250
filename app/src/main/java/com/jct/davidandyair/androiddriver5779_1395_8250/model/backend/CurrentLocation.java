@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -13,13 +15,17 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
+
 public class CurrentLocation {
     // Acquire a reference to the system Location Manager
     LocationManager locationManager;
     // Define a listener that responds to location updates
     LocationListener locationListener;
 
-    Context context;
+    static Context context;
 
     Boolean isGPSEnabled;
     Boolean isNetworkEnabled;
@@ -83,5 +89,26 @@ public class CurrentLocation {
                 Toast.makeText(context, "Error: " + e, Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+
+    public static String getPlace(Location location, Context context) {
+        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        List<Address> addresses = null;
+        try {
+            addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+            if (addresses.size() > 0) {
+                String cityName = addresses.get(0).getAddressLine(0);
+                return cityName;
+            }
+
+            return "no place: \n (" + location.getLongitude() + " , " + location.getLatitude() + ")";
+        } catch (IOException e)
+
+        {
+            e.printStackTrace();
+        }
+        return "IOException ...";
     }
 }

@@ -5,6 +5,7 @@ import android.content.ContentProviderResult;
 import android.content.Context;
 import android.content.OperationApplicationException;
 import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.net.Uri;
 import android.os.RemoteException;
@@ -18,11 +19,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.CurrentLocation;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class ListViewAdapter extends BaseAdapter{
     private class ViewHolder{
@@ -47,8 +51,6 @@ public class ListViewAdapter extends BaseAdapter{
         this.context = context;
         this.driver = driver;
     }
-
-    private Location getPlace(Location location) {return null;}// todo: implement this function like BD's project
 
     @Override
     public int getCount() {
@@ -82,7 +84,7 @@ public class ListViewAdapter extends BaseAdapter{
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.endDrive.setText("kkk");// todo: insert the value into setText...
+        viewHolder.endDrive.setText(CurrentLocation.getPlace(AddressToLocation(drive.getDestination()),context));// todo: insert the value into setText...
         float payment = AddressToLocation(drive.getSource()).distanceTo(AddressToLocation(drive.getDestination()));
         payment /= 100;// todo: check whether this is our payment formula
         int temp = (int) payment;
@@ -123,7 +125,7 @@ public class ListViewAdapter extends BaseAdapter{
                 ops.add(ContentProviderOperation.newInsert(ContactsContract.Data.CONTENT_URI)
                         .withValueBackReference(ContactsContract.Data.RAW_CONTACT_ID, rawContactInsertIndex)
                         .withValue(ContactsContract.Data.MIMETYPE, ContactsContract.CommonDataKinds.StructuredPostal.CONTENT_ITEM_TYPE)
-                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS, getPlace(AddressToLocation(drive.getSource())))
+                        .withValue(ContactsContract.CommonDataKinds.StructuredPostal.FORMATTED_ADDRESS, CurrentLocation.getPlace(AddressToLocation(drive.getSource()),context))
                         .withValue(ContactsContract.CommonDataKinds.StructuredPostal.TYPE, ContactsContract.CommonDataKinds.StructuredPostal.TYPE_WORK)
                         .build());
                 // SAVE CONTACT IN BCR Structure
