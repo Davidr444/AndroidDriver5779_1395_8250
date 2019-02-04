@@ -21,11 +21,11 @@ import java.util.List;
 
 @SuppressLint("ValidFragment")
 public class OrdersFragment extends Fragment {
-    View view;
-    ExpandableListView list;
-    List<Drive> ordersList;
-    ExpandableListAdapter adapter;
-    Driver driver;
+    private View view;
+    public static List<Drive> ordersList;
+    private ExpandableListView list;
+    private ExpandableListAdapter adapter;
+    private Driver driver;
 
     public OrdersFragment(Driver driver){
         this.driver = driver;
@@ -39,6 +39,6 @@ public class OrdersFragment extends Fragment {
         adapter = new ExpandableListAdapter(getContext(), ordersList, driver);
         list.setAdapter(adapter);
 
-        return view;
+        return null;
     }
 }

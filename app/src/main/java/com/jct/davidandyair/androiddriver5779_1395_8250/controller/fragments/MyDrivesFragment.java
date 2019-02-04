@@ -20,7 +20,7 @@ import java.util.List;
 @SuppressLint("ValidFragment")
 public class MyDrivesFragment extends Fragment {
     View view;
-    public static List<Drive> finishedDrives = new ArrayList<>();
+    public static List<Drive> finishedDrives;
     ListView finishedDrivesListView;
     ListViewAdapter listViewAdapter;
     Driver driver;
