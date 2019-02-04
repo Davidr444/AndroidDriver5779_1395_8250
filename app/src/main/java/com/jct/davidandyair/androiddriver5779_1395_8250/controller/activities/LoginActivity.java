@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.CurrentLocation;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
@@ -33,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private String password;
     private IBackend backend;
     private CheckBox rememberMe;
+    CurrentLocation currentLocation;
 
     @Nullable
     private Driver checkIdentity(String mail, String p){
@@ -51,6 +53,8 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         findViews();
+        currentLocation= new CurrentLocation(this);
+        currentLocation.TurnOnLocation();
 
         loadSharedPreferences();
 

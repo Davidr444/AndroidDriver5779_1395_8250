@@ -30,14 +30,14 @@ public class CurrentLocation {
     Boolean isGPSEnabled;
     Boolean isNetworkEnabled;
 
-    public Location currentLocation;
+    static public Location currentLocation = new Location("A");
 
     public CurrentLocation(Context _context)
     {
         context = _context;
-        currentLocation = null;
+        //currentLocation = null;
 
-        TurnOnLocation();
+        //TurnOnLocation();
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {

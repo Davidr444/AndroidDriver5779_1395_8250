@@ -46,6 +46,7 @@ public class FireBaseBackend implements IBackend {
     public void addNotifyDataChangeListener(NotifyDataChange<List<Drive>> l)
     {
         listeners.add(l);
+        l.OnDataChanged(drives);
     }
     public void removeNotifyDataChangeListener(NotifyDataChange<List<Drive>> l)
     {
@@ -70,6 +71,7 @@ public class FireBaseBackend implements IBackend {
     //Constructor - Important
     public FireBaseBackend()
     {
+        listeners = new ArrayList<NotifyDataChange<List<Drive>>>();
         notifyToDriverList(new NotifyDataChange<List<Driver>>() {
             @Override
             public void OnDataChanged(List<Driver> obj) {

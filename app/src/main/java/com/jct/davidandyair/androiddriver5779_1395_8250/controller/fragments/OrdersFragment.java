@@ -34,7 +34,6 @@ public class OrdersFragment extends Fragment {
     public static List<Drive> driveList = new ArrayList<Drive>();
 
     public void getInstance(Driver driver){this.driver = driver;}
-    public OrdersFragment(){}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -46,23 +45,27 @@ public class OrdersFragment extends Fragment {
 
         distanceFilter.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (count < before) {
+                    // We're deleting char so we need to reset the adapter data
+                    listAdapter.resetData(driveList);
+                }
+
+                listAdapter.getFilter().filter(s.toString());
 
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if(count<before)
-                    listAdapter.resetData();
+            public void beforeTextChanged(CharSequence s, int start, int count,
+                                          int after) {
 
-                listAdapter.getFilter().filter(s.toString());
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
+
         final Context context = this.getContext();
         FactoryBackend.getBackend().addNotifyDataChangeListener(new FireBaseBackend.NotifyDataChange<List<Drive>>() {
             @Override

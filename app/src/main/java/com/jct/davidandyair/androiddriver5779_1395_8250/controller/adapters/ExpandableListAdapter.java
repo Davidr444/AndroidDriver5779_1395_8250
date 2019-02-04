@@ -30,8 +30,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter implements Filterable {
-    public void resetData() {
-        //todo: need to be implemnted
+    public void resetData(List<Drive> l) {
+        driveList = l;
     }
 
     private class ListGroupViewHolder{
@@ -115,7 +115,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         }
         // Populate the data into the template view using the data object
         viewHolder.inputName.setText(drive.getName());
-        viewHolder.numberOfKm.setText(Float.toString(AddressToLocation(drive.getSource()).distanceTo(currentLocation.currentLocation)));
+        float temp = AddressToLocation(drive.getSource()).distanceTo(currentLocation.currentLocation);
+        int t = (int) temp;
+        viewHolder.numberOfKm.setText(String.valueOf(t));
         viewHolder.inputPhoneNumber.setText(drive.getPhoneNumber());
         // Return the completed view to render on screen
         return convertView;
