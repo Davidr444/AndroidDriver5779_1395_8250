@@ -8,4 +8,10 @@ public class MyAddress extends Address {
     {
         super(null);
     }
+
+    @Override
+    public String toString ()
+    {
+        return super.toString();
+    }
 }
