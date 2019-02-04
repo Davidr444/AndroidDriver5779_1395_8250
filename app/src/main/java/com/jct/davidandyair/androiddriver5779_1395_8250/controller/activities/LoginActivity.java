@@ -153,13 +153,11 @@ public class LoginActivity extends AppCompatActivity {
         if (sharedPreferences.contains("MAIL"))
         {
             usName.setText(sharedPreferences.getString("MAIL", null));
-            Toast.makeText(this, "load mail", Toast.LENGTH_SHORT).show();// todo: i dont think it is needed
             rememberMe.setChecked(true);
         }
         if (sharedPreferences.contains("PASSWORD"))
         {
             pssd.setText(sharedPreferences.getString("PASSWORD", null));
-            Toast.makeText(this, "load password", Toast.LENGTH_SHORT).show();// todo: i dont think it is needed
             rememberMe.setChecked(true);
         }
     }
@@ -170,7 +168,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.commit();
-        Toast.makeText(this, "clear Preferences", Toast.LENGTH_SHORT).show();// todo: I'm debating if whether it is needed
     }
     //endregion
 }
