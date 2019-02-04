@@ -87,7 +87,9 @@ public class ListViewAdapter extends BaseAdapter{
         payment /= 100;// todo: check whether this is our payment formula
         int temp = (int) payment;
         payment = (float) (temp) / 10;
-        viewHolder.payment.setText(String.valueOf(payment) + context.getString(R.string.shekel));
+        viewHolder.payment.setText(String.valueOf(payment) + context.getString(R.string.coin));
+
+        //region Contenet Provider
         viewHolder.addContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +152,7 @@ public class ListViewAdapter extends BaseAdapter{
 
             }
         });
+        //endregion
 
         return convertView;
     }
