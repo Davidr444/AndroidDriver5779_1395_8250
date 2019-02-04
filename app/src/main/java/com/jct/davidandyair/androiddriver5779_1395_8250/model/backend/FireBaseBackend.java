@@ -32,11 +32,27 @@ public class FireBaseBackend implements IBackend {
         void onFailure(Exception exception);
         void onProgress(String status, double percent);
     }
+
+    //endregion
+
+    //region NOTIFY DATA CHANGE
     public interface NotifyDataChange<T>  {
         void OnDataChanged(T obj);
         void onFailure(Exception exception);
     }
+
+    private List<NotifyDataChange<List<Drive>>> listeners;
+
+    public void addNotifyDataChangeListener(NotifyDataChange<List<Drive>> l)
+    {
+        listeners.add(l);
+    }
+    public void removeNotifyDataChangeListener(NotifyDataChange<List<Drive>> l)
+    {
+        listeners.remove(l);
+    }
     //endregion
+
 
     //region Lists
     private List<Driver> drivers = new ArrayList<Driver>();
@@ -68,7 +84,13 @@ public class FireBaseBackend implements IBackend {
         notifyToDrivesList(new NotifyDataChange<List<Drive>>() {
             @Override
             public void OnDataChanged(List<Drive> obj) {
+
                 drives = obj;
+                if(listeners != null) {
+                    for (NotifyDataChange<List<Drive>> l : listeners) {
+                        l.OnDataChanged(drives);
+                    }
+                }
             }
 
             @Override

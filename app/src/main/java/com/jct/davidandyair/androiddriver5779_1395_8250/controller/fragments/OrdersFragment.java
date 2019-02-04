@@ -64,7 +64,7 @@ public class OrdersFragment extends Fragment {
             }
         });
         final Context context = this.getContext();
-        FactoryBackend.getBackend().notifyToDrivesList(new FireBaseBackend.NotifyDataChange<List<Drive>>() {
+        FactoryBackend.getBackend().addNotifyDataChangeListener(new FireBaseBackend.NotifyDataChange<List<Drive>>() {
             @Override
             public void OnDataChanged(List<Drive> obj) {
                 driveList = FactoryBackend.getBackend().getUnhandledDrives(null);
