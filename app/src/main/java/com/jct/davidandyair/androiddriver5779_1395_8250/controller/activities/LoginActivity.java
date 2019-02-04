@@ -139,7 +139,6 @@ public class LoginActivity extends AppCompatActivity {
             editor.putString("MAIL", mail);
             editor.putString("PASSWORD", password);
             editor.commit();
-            Toast.makeText(this, "save name and age Preferences", Toast.LENGTH_SHORT).show();// todo: i think that it is not needed
         }
         catch (Exception ex)
         {

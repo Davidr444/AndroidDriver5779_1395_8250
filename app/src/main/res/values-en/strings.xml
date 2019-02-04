@@ -48,4 +48,5 @@
     <string name="nav_about_us">About Us</string>
     <string name="nav_share">Share</string>
     <string name="nav_log_off">Log off</string>
+    <string name="payment">payment:</string>
 </resources>
