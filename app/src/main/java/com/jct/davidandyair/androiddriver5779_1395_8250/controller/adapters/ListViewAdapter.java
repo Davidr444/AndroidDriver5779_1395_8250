@@ -131,7 +131,7 @@ public class ListViewAdapter extends BaseAdapter{
                 // SAVE CONTACT IN BCR Structure
                 Uri newContactUri = null;
                 //PUSH EVERYTHING TO CONTACTS
-                try {
+                try { // todo: understand and fix
                     ContentProviderResult[] res = context.getContentResolver().applyBatch(ContactsContract.AUTHORITY, ops);
                     if (res != null && res[0] != null) {
                         newContactUri = res[0].uri;
