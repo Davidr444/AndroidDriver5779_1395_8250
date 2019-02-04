@@ -45,7 +45,7 @@
     <string name="nav_home">בית</string>
     <string name="nav_orders">נסיעות זמינות</string>
     <string name="nav_my_drives">הנסיעות שלי</string>
-    <string name="nav_about_us">עלינו</string>
+    <string name="nav_about_us">קצת עלינו</string>
     <string name="nav_share">שתף</string>
     <string name="nav_log_off">התנתק</string>
 </resources>
