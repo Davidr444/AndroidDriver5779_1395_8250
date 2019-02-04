@@ -82,14 +82,14 @@ public class ListViewAdapter extends BaseAdapter{
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.endDrive.setText(drive.getDestination().toString());
+        viewHolder.endDrive.setText("");// todo: insert the value into setText...
         float payment = AddressToLocation(drive.getSource()).distanceTo(AddressToLocation(drive.getDestination()));
         payment /= 100;// todo: check whether this is our payment formula
         int temp = (int) payment;
         payment = (float) (temp) / 10;
         viewHolder.payment.setText(String.valueOf(payment) + context.getString(R.string.coin));
 
-        //region Contenet Provider
+        //region Content Provider
         viewHolder.addContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
