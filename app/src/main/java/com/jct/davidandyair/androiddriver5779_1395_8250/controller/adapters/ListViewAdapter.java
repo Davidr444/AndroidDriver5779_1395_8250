@@ -77,7 +77,9 @@ public class ListViewAdapter extends BaseAdapter{
             viewHolder.payment = (TextView) convertView.findViewById(R.id.paymentInput);
             viewHolder.addContacts = (FloatingActionButton) convertView.findViewById(R.id.AddContacts);
             convertView.setTag(viewHolder);
-        } else {
+        }
+
+        else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.endDrive.setText(drive.getDestination().toString());
