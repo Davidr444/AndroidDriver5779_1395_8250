@@ -30,6 +30,10 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter implements Filterable {
+    public void resetData() {
+        //todo: need to be implemnted
+    }
+
     private class ListGroupViewHolder{
         public TextView inputName;
         public TextView inputPhoneNumber;

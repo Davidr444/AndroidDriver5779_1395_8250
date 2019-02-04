@@ -82,7 +82,7 @@ public class ListViewAdapter extends BaseAdapter{
         else {
             viewHolder = (ViewHolder) convertView.getTag();
         }
-        viewHolder.endDrive.setText(drive.getDestination().toString());// todo: insert the value into setText...
+        viewHolder.endDrive.setText("kkk");// todo: insert the value into setText...
         float payment = AddressToLocation(drive.getSource()).distanceTo(AddressToLocation(drive.getDestination()));
         payment /= 100;// todo: check whether this is our payment formula
         int temp = (int) payment;

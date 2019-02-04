@@ -79,7 +79,7 @@ public class FireBaseBackend implements IBackend {
     }
 
     //region Notify Functions
-    private void notifyToDrivesList(final NotifyDataChange<List<Drive>> notifyDataChange){
+    public void notifyToDrivesList(final NotifyDataChange<List<Drive>> notifyDataChange){
         if (notifyDataChange != null)
         {
             if (drivesRefChildEventListener != null)

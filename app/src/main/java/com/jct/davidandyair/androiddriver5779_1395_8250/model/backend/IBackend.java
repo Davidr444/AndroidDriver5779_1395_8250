@@ -24,4 +24,5 @@ public interface IBackend {
     void changeStatus(Drive drive, Drive.DriveStatus status);
     void updateDrive(final Drive toUpdate);
     float getPrice(Address source, Address destination);
+    public void notifyToDrivesList(final FireBaseBackend.NotifyDataChange<List<Drive>> notifyDataChange);
 }
