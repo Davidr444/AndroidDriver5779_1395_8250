@@ -33,7 +33,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="235dp"
             android:layout_marginEnd="0dp"
-            android:text="Made By:"
+            android:text="@string/made_by"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -45,7 +45,7 @@
             android:layout_below="@+id/made_by"
             android:layout_alignParentStart="true"
             android:fontFamily="casual"
-            android:text="David Rakovsky and Yair Ben-David"
+            android:text="@string/david_yair"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -57,7 +57,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="322dp"
-            android:text="Lecturer:"
+            android:text="@string/lecturer"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -71,7 +71,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="358dp"
             android:fontFamily="casual"
-            android:text="Eliezer Gensburger"
+            android:text="@string/eliezer_gensburger"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
 
@@ -83,7 +83,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="0dp"
             android:layout_marginTop="406dp"
-            android:text="Course:"
+            android:text="@string/course"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -97,7 +97,7 @@
             android:layout_marginStart="0dp"
             android:layout_marginTop="435dp"
             android:fontFamily="casual"
-            android:text="Workshop in Java 2019"
+            android:text="@string/workshop"
             android:textColor="@android:color/black"
             android:textSize="20sp" />
     </RelativeLayout>

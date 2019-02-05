@@ -39,7 +39,7 @@
     <string name="sms_passenger">"Send message "</string>
     <string name="take_drive">Take The Drive</string>
     <string name="pass_progress">pass progress</string>
-    <string name="Taxi_On_The_Way">your taxi is on the way</string>
+    <string name="Taxi_On_The_Way">The taxi you ordered is on your way to you!</string>
     <string name="share_message">I also use Get Taxi. Join me and enjoy advanced taxi services through your smartphone!</string>
     <string name="share_title">Share Get taxi with:</string>
     <string name="welcome_driver">, welcome!</string>
@@ -54,6 +54,12 @@
     <string name="nav_share">Share</string>
     <string name="nav_log_off">Log off</string>
     <string name="filter">filter</string>
-    <string name="new_reqest">new request for drive</string>
-    <string name="relevent_drive">you have a new relevant drive to take</string>
+    <string name="new_reqest">New drive received</string>
+    <string name="relevent_drive">You\'ve received a new drive that\'s relevant to you!</string>
+    <string name="made_by">Made By:</string>
+    <string name="david_yair">David Rakovsky and Yair Ben-David</string>
+    <string name="lecturer">Lecturer:</string>
+    <string name="eliezer_gensburger">Eliezer Gensburger</string>
+    <string name="course">Course:</string>
+    <string name="workshop">Workshop in Java 2019</string>
 </resources>

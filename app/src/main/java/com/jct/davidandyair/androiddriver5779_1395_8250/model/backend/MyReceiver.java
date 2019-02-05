@@ -15,6 +15,14 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.controller.activities.Lo
 
 import static android.support.v4.content.ContextCompat.getColor;
 
+/**
+ * <h1>MyReciver BroadcastReceiver</h1></h1>
+ * ?????????????????????????????????????????
+ * @author  David Rakovsky and Yair Ben-David
+ * @version 1.0
+ * @since   2019-02-05
+ */
+
 public class MyReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

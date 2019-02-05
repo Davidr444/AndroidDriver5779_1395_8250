@@ -19,6 +19,15 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+/**
+ * <h1>Current Location Class</h1></h1>
+ * The Class is responsible for all matters of location in the project,
+ * and especially about finding the current location.
+ * @author  David Rakovsky and Yair Ben-David
+ * @version 1.0
+ * @since   2019-02-05
+ */
+
 public class CurrentLocation {
     // Acquire a reference to the system Location Manager
     LocationManager locationManager;
@@ -32,12 +41,13 @@ public class CurrentLocation {
 
     static public Location currentLocation = new Location("A");
 
+    /**
+     * The function triggers location search on the device
+     * @param _context The Context of the caller activity
+     */
     public CurrentLocation(Context _context)
     {
         context = _context;
-        //currentLocation = null;
-
-        //TurnOnLocation();
 
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
         locationListener = new LocationListener() {
@@ -53,6 +63,13 @@ public class CurrentLocation {
     /*Checks whether the location is turned on and has
      * permissions for everything you need, and if not,
      * turns on location and prompts for permissions
+     */
+
+    /**
+     * This method checks whether the location is turned on and has
+     * permissions for everything you need, and if not,
+     * turns on location and prompts for permissions
+     * @return void
      */
     public void TurnOnLocation() {
         int locationOff = 0;

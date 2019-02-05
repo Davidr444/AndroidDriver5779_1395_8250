@@ -11,8 +11,24 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+
+/**
+ * <h1>MyService Service</h1></h1>
+ * Service runs in the background and checks every 10 seconds
+ * if a new drive has been added to the database.
+ * If so, it activates the BroadcastReceiver.
+ * @author  David Rakovsky and Yair Ben-David
+ * @version 1.0
+ * @since   2019-02-05
+ */
 public class MyService extends Service {
     FireBaseBackend.NotifyDataChange<List<Drive>> listener;
+
+
+    /**
+     * Function On Once the service is created, the message shows that the service was created.
+     * @return void
+     */
     @Override
     public void onCreate() {
         super.onCreate();
@@ -20,6 +36,12 @@ public class MyService extends Service {
 
     }
 
+    /**
+     * Function Once the service is activated,
+     * the function checks every 10 seconds if there is an update
+     * in the travel list, and if so, activates the BroadcastReceiver.
+     * @return START_STICKY
+     */
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         listener = new FireBaseBackend.NotifyDataChange<List<Drive>>() {
@@ -43,6 +65,11 @@ public class MyService extends Service {
         return START_STICKY;
     }
 
+    /**
+     * Function Once the service is destroyed,
+     * the function removes the listener and announces its destruction.
+     * @return void
+     */
     @Override
     public void onDestroy() {
         super.onDestroy();

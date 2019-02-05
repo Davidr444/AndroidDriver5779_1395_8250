@@ -51,4 +51,13 @@
     <string name="payment">payment:</string>
     <string name="end_drive">end drive:</string>
     <string name="filter">filter</string>
+    <string name="Taxi_On_The_Way">The taxi you ordered is on your way to you!</string>
+    <string name="relevent_drive">You\'ve received a new drive that\'s relevant to you!</string>
+    <string name="new_reqest">New drive received</string>
+    <string name="made_by">Made By:</string>
+    <string name="david_yair">David Rakovsky and Yair Ben-David</string>
+    <string name="lecturer">Lecturer:</string>
+    <string name="eliezer_gensburger">Eliezer Gensburger</string>
+    <string name="course">Course:</string>
+    <string name="workshop">Workshop in Java 2019</string>
 </resources>
