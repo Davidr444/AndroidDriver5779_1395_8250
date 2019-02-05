@@ -30,8 +30,8 @@ import java.util.Calendar;
 import java.util.List;
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter implements Filterable {
-    public void resetData(List<Drive> l) {
-        driveList = l;
+    public void resetData() {
+        driveList = constdriveList;
     }
 
     private class ListGroupViewHolder{
@@ -52,6 +52,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
 
     private Context context;
     private List<Drive> driveList;
+    private List<Drive> constdriveList;
     private Driver driver;
     private Filter distanceFilter;
     private CurrentLocation currentLocation;
@@ -61,6 +62,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
         this.driveList = dataSource;
         this.driver = driver;
         currentLocation = new CurrentLocation(context);
+        this.constdriveList = driveList;
     }
 
     @Override
@@ -238,8 +240,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
             // We implement here the filter logic
             if ((constraint == null) || (constraint.length() == 0)) {
                 // No filter implemented we return all the list
-                results.values = driveList;
-                results.count = driveList.size();
+                results.values = constdriveList;
+                results.count = constdriveList.size();
             }else if (!Character.isDigit(constraint.charAt(constraint.length()-1))){
                 results.values = driveList;
                 results.count = driveList.size();
@@ -247,7 +249,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
             else {
                 // We perform filtering operation
                 List<Drive> nRideList = new ArrayList<Drive>();
-                for (Drive drive : driveList) {
+                for (Drive drive : constdriveList) {
                     float distance = (AddressToLocation(drive.getSource()).distanceTo(currentLocation.currentLocation));
                     distance /= 100;
                     int temp = (int)(distance);

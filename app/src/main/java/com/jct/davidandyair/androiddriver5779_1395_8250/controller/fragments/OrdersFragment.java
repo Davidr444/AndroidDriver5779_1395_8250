@@ -48,7 +48,7 @@ public class OrdersFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (count < before) {
                     // We're deleting char so we need to reset the adapter data
-                    listAdapter.resetData(driveList);
+                    listAdapter.resetData();
                 }
 
                 listAdapter.getFilter().filter(s.toString());

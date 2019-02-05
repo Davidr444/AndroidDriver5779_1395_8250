@@ -30,7 +30,7 @@ import java.util.Map;
  * add drive to the firebase and get lists of drives and drivers.
  * This class can also manipulate the data and return constrainted lists if needed.
  * the output on the screen.
- * @author  Yair Ben David and David Rakovski
+ * @author  Yair Ben David and David Rakovsky
  * @version 1.0
  * @since   2019-02-04
  */
@@ -117,6 +117,7 @@ public class FireBaseBackend implements IBackend {
     }
 
     //region Notify Functions
+    //todo: JAVADOC
     public void notifyToDrivesList(final NotifyDataChange<List<Drive>> notifyDataChange){
         if (notifyDataChange != null)
         {
@@ -151,6 +152,7 @@ public class FireBaseBackend implements IBackend {
             drivesRef.addChildEventListener(drivesRefChildEventListener);
         }
     }
+    //todo: JAVADOC
     public void notifyToDriverList(final NotifyDataChange<List<Driver>> notifyDataChange){
         if (notifyDataChange != null)
         {
@@ -185,12 +187,14 @@ public class FireBaseBackend implements IBackend {
             driverRef.addChildEventListener(driversRefChildEventListener);
         }
     }
+    //todo: JAVADOC
     public static void stopNotifyToDrivesList(){
         if(drivesRefChildEventListener != null){
             drivesRef.removeEventListener(drivesRefChildEventListener);
             drivesRefChildEventListener = null;
         }
     }
+    //todo: JAVADOC
     public static void stopNotifyToDriversList(){
         if(driversRefChildEventListener != null){
             driverRef.removeEventListener(driversRefChildEventListener);
@@ -216,6 +220,7 @@ public class FireBaseBackend implements IBackend {
 
         return locationA.distanceTo(locationB);
     }
+
     /**
      * This method is used to calculate the distance between two addresses.
      * @param a This is the first paramter to this method that describes the first address.
@@ -339,6 +344,7 @@ public class FireBaseBackend implements IBackend {
         return driverDrives;
     }
 
+    //todo: JAVADOC
     @Override
     public List<Drive> getDrivesByDate(Date date, Action<Long> action) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("DD/MM//YYYY");
@@ -354,6 +360,7 @@ public class FireBaseBackend implements IBackend {
         return returnVal;
     }
 
+    //todo: JAVADOC
     @Override
     public List<Drive> getDrivesByPrice(float price, Action<Long> action) {
       List<Drive> returnVal = getUnhandledDrives(null);
@@ -366,19 +373,21 @@ public class FireBaseBackend implements IBackend {
         return returnVal;
     }
 
+    //todo: JAVADOC
     @Override
     public List<Driver> getDrivers(final Action<Long> action){
 
         return drivers;
     }
 
+    //todo: JAVADOC
     @Override
     public void changeStatus(Drive drive, Drive.DriveStatus status){
         drive.setStatus(status);
         updateDrive(drive);
     }
 
-
+    //todo: JAVADOC
     @Override
     public List<String> getDriversNames(final Action<Long> action){
         final List<String> driversNames = new ArrayList<String>();
