@@ -20,6 +20,7 @@ import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.CurrentLocation;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.IBackend;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.MyService;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
 import java.util.List;
@@ -51,6 +52,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        startService(new Intent(LoginActivity.this, MyService.class));
 
         findViews();
         currentLocation= new CurrentLocation(this);
