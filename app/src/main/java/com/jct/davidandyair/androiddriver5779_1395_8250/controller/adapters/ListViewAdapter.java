@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.jct.davidandyair.androiddriver5779_1395_8250.R;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.CurrentLocation;
+import com.jct.davidandyair.androiddriver5779_1395_8250.model.backend.FactoryBackend;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Drive;
 import com.jct.davidandyair.androiddriver5779_1395_8250.model.entities.Driver;
 
@@ -95,6 +96,7 @@ public class ListViewAdapter extends BaseAdapter{
         viewHolder.addContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FactoryBackend.getBackend().changeStatus(drive, Drive.DriveStatus.FINISHED);
                 ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
                 int rawContactInsertIndex = ops.size();
                 ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
