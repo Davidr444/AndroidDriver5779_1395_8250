@@ -29,8 +29,7 @@ public class MyService extends Service {
                 calendar.add(Calendar.SECOND,-10);
                 Date date = calendar.getTime();
                 for (Drive drive : obj) {
-                   // todo: if (drive.getWhenLoadToFirebase().after(date)) {
-                    {
+                   if (drive.getWhenLoadToFIrebase().after(date)) {
                         Intent intent = new Intent(MyService.this, MyReceiver.class);
                         sendBroadcast(intent);
                     }

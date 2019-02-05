@@ -21,6 +21,7 @@ public class Drive {
     private String eMailAddress;
     private long driverId;
     private String key;
+    private Date whenLoadToFIrebase;
 
     public Drive()
     {
@@ -33,10 +34,11 @@ public class Drive {
         this.phoneNumber = null;
         this.eMailAddress = null;
         this.driverId = 0;
+        whenLoadToFIrebase = null;
     }
 
     public Drive(DriveStatus status, MyAddress source, MyAddress destination, Time beginning, Time end,
-                 String name, String phoneNumber, String eMailAddress, int driverId)
+                 String name, String phoneNumber, String eMailAddress, int driverId, String key, Date whenLoadToFirebase)
     {
         this.status = status;
         this.source = source;
@@ -47,6 +49,8 @@ public class Drive {
         this.phoneNumber = phoneNumber;
         this.eMailAddress = eMailAddress;
         this.driverId = driverId;
+        this.key =key;
+        this.whenLoadToFIrebase = whenLoadToFirebase;
     }
     public boolean compareTo(Drive d){
         if(
@@ -90,6 +94,9 @@ public class Drive {
     }
     public void setDriverId(long driverId) { this.driverId = driverId; }
     public void setKey(String key) { this.key = key; }
+    public void setWhenLoadToFIrebase(Date whenLoadToFIrebase) {
+        this.whenLoadToFIrebase = whenLoadToFIrebase;
+    }
     //endregion
 
     //region gets
@@ -121,6 +128,9 @@ public class Drive {
         return driverId;
     }
     public String getKey() { return key; }
+    public Date getWhenLoadToFIrebase() {
+        return whenLoadToFIrebase;
+    }
     //endregion
 
 }
