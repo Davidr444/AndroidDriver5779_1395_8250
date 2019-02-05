@@ -24,6 +24,17 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * <h1>in this class we implement the functions of the backend using the firebase</h1></h1>
+ * The FireBaseBackend class has implemented functions that
+ * add drive to the firebase and get lists of drives and drivers.
+ * This class can also manipulate the data and return constrainted lists if needed.
+ * the output on the screen.
+ * @author  Yair Ben David and David Rakovski
+ * @version 1.0
+ * @since   2019-02-04
+ */
+
 public class FireBaseBackend implements IBackend {
 
     //region Interfaces
@@ -68,7 +79,10 @@ public class FireBaseBackend implements IBackend {
     private static DatabaseReference drivesRef = database.getReference("drives");
     //endregion
 
-    //Constructor - Important
+    /**
+     * This method is used to create a nes instance of this class. This is
+     * no parameters and no return values.
+     */
     public FireBaseBackend()
     {
         listeners = new ArrayList<NotifyDataChange<List<Drive>>>();
@@ -185,6 +199,12 @@ public class FireBaseBackend implements IBackend {
     }
     //endregion
 
+    /**
+     * This method is used to calculate the distance between address and location.
+     * @param a This is the first paramter to this method that describes the first address.
+     * @param b This is the second paramter to this method that describes the location.
+     * @return float number that tells the caller function the distacne betweeen the parameter.
+     */
     private float calculateDistance(Address a, Location b){
         Location locationA = new Location("A");
         Location locationB = new Location("B");
@@ -196,7 +216,12 @@ public class FireBaseBackend implements IBackend {
 
         return locationA.distanceTo(locationB);
     }
-
+    /**
+     * This method is used to calculate the distance between two addresses.
+     * @param a This is the first paramter to this method that describes the first address.
+     * @param b This is the second paramter to this method that describes the second address.
+     * @return float number that tells the caller function the distacne betweeen the address.
+     */
     private float calculateDistance(Address a, Address b){
         Location locationA = new Location("A");
         Location locationB = new Location("B");
@@ -209,6 +234,12 @@ public class FireBaseBackend implements IBackend {
         return locationA.distanceTo(locationB);
     }
 
+    /**
+     * This method is used to push a new driver to the firebase in a case of a new driver that sign in to
+     * our app. in this function we push the information of the driver to our backend.
+     * @param driver This is the first paramter to this method that describes the driver details.
+     * @return void - no return values.
+     */
     @Override
     public void addDriver(final Driver driver) {
       String key =  driverRef.push().getKey();
@@ -217,6 +248,11 @@ public class FireBaseBackend implements IBackend {
       driverRef.child(key).setValue(driver);
     }
 
+    /**
+     * This method is used in order to return a list of all the drives that has not been handeled yet.
+     * @param action This paramter is used to allow the caller send us an "action" if "listening" was succesful or fail.
+     * @return the list of drives that we got from the firebase.
+     */
     @Override
     public List<Drive> getUnhandledDrives(Action<Long> action){
       List<Drive> unhandledDrives = new ArrayList<>();
@@ -228,6 +264,11 @@ public class FireBaseBackend implements IBackend {
       return unhandledDrives;
     }
 
+    /**
+     * This method is used in order to return a list of all the drives that has already been handeled and finished.
+     * @param action This paramter is used to allow the caller send us an "action" if "listening" was succesful or fail.
+     * @return the list of drives that we got from the firebase.
+     */
     @Override
     public List<Drive> getFinishedDrives(Action<Long> action) {
         List<Drive> finishedDrives = new ArrayList<>();
@@ -239,6 +280,12 @@ public class FireBaseBackend implements IBackend {
         return finishedDrives;
     }
 
+    /**
+     * This method is used in order to return a list of all the drives that belong to a specific driver.
+     * @param driver this parameter describes the details of the driver that we're looking for his drives.
+     * @param action This paramter is used to allow the caller send us an "action" if "listening" was succesful or fail.
+     * @return the list of drives that we got from the firevbase.
+     */
     @Override
     public List<Drive> getDriversDrives(final Driver driver, Action<Long> action) {
 
@@ -250,6 +297,13 @@ public class FireBaseBackend implements IBackend {
         return driverDrives;
     }
 
+    /**
+     * This method is used in order to return a list of all the drives
+     * that their destination is in a specific city.
+     * @param address this parameter describes the city that we're looking for.
+     * @param action This paramter is used to allow the caller send us an "action" if "listening" was succesful or fail.
+     * @return the list of drives that we got from the firevbase.
+     */
     @Override
     public List<Drive> getDrivesByCity(Address address, Action<Long> action) {
       List<Drive> cityDrives = getUnhandledDrives(null);
@@ -265,7 +319,15 @@ public class FireBaseBackend implements IBackend {
     }
 
 
-
+    /**
+     * This method is used in order to return a list of all the drives that have a
+     * specific diatance from the current location of the driver.
+     * @param driver describes the driver that is connected to our app right now.
+     * @param distance the wanted distance.
+     * @param currentLocation the driver's current location.
+     * @param action This paramter is used to allow the caller send us an "action" if the "listening" was succesful or fail.
+     * @return the list of drives that we got from the firevbase.
+     */
     @Override
     public List<Drive> getDrivesByDistance(Driver driver, float distance, Address currentLocation, Action<Long> action) {
       List<Drive> driverDrives = getUnhandledDrives(null);
@@ -329,12 +391,24 @@ public class FireBaseBackend implements IBackend {
         return driversNames;
     }
 
+    /**
+     * This method is used in order to update a drive in the firebase
+     * @param toUpdate This paramter describes the new drive that we want to update.
+     * @return void - no return value
+     */
     @Override
     public void updateDrive(final Drive toUpdate){
         final String key = toUpdate.getKey();
         drivesRef.child(key).setValue(toUpdate);
     }
 
+    /**
+     * This method is used in order to calculate the price of specific ride.
+     * the ride is described by its source and destination addresses.
+     * @param source describes the source of this ride.
+     * @param destination describes the destination of this ride.
+     * @return float number that tells the caller the price of this ride.
+     */
     @Override
     public float getPrice(Address source, Address destination) {
         return calculateDistance(source, destination)/1000 * 5;

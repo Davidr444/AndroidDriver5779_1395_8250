@@ -247,13 +247,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter implements 
             else {
                 // We perform filtering operation
                 List<Drive> nRideList = new ArrayList<Drive>();
-                for (Drive ride : driveList) {
-                    float distance = (AddressToLocation(ride.getSource()).distanceTo(currentLocation.currentLocation));
+                for (Drive drive : driveList) {
+                    float distance = (AddressToLocation(drive.getSource()).distanceTo(currentLocation.currentLocation));
                     distance /= 100;
                     int temp = (int)(distance);
                     distance = (float)(temp) / 10;
                     if (distance <= Float.valueOf(constraint.toString()))
-                        nRideList.add(ride);
+                        nRideList.add(drive);
                 }
                 results.values = nRideList;
                 results.count = nRideList.size();

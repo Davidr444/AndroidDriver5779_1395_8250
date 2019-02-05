@@ -3,8 +3,6 @@ package com.jct.davidandyair.androiddriver5779_1395_8250.model.entities;
 import java.sql.Time;
 import java.util.Date;
 
-
-
 public class Drive {
 
     public enum DriveStatus {
