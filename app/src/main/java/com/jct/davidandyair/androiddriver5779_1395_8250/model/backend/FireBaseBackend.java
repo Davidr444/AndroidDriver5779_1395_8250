@@ -344,7 +344,13 @@ public class FireBaseBackend implements IBackend {
         return driverDrives;
     }
 
-    //todo: JAVADOC
+    /**
+     * This method is used in order to return a list of all the drives that started on
+     * a specific date.
+     * @param date describes the date we're looking for.
+     * @param action This paramter is used to allow the caller send us an "action" if the "listening" was succesful or fail.
+     * @return the list of drives that we got from the firevbase.
+     */
     @Override
     public List<Drive> getDrivesByDate(Date date, Action<Long> action) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("DD/MM//YYYY");
@@ -360,7 +366,12 @@ public class FireBaseBackend implements IBackend {
         return returnVal;
     }
 
-    //todo: JAVADOC
+    /**
+     * This method is used in order to return a list of all the drives that cost a specific price.
+     * @param price describes the price we want.
+     * @param action This paramter is used to allow the caller send us an "action" if the "listening" was succesful or fail.
+     * @return the list of drives that we got from the firevbase.
+     */
     @Override
     public List<Drive> getDrivesByPrice(float price, Action<Long> action) {
       List<Drive> returnVal = getUnhandledDrives(null);
@@ -373,21 +384,35 @@ public class FireBaseBackend implements IBackend {
         return returnVal;
     }
 
-    //todo: JAVADOC
+
+    /**
+     * This method is used in order to return all the drivers that we have on the firebase.
+     * @param action This paramter is used to allow the caller send us an "action" if the "listening" was succesful or fail.
+     * @return the list of drivers that we got from the firevbase.
+     */
     @Override
     public List<Driver> getDrivers(final Action<Long> action){
 
         return drivers;
     }
 
-    //todo: JAVADOC
-    @Override
+    /**
+     * This method is used in order to change the status of the drive when needed.
+     * @param drive describes the drive we want to change.
+     * @param status the new status that the drive will get.
+     * @return void - no return value.
+     */
+   @Override
     public void changeStatus(Drive drive, Drive.DriveStatus status){
         drive.setStatus(status);
         updateDrive(drive);
     }
 
-    //todo: JAVADOC
+    /**
+     * This method is used in order to return the names of all the drivers that we have on the firebase.
+     * @param action This paramter is used to allow the caller send us an "action" if the "listening" was succesful or fail.
+     * @return the list of names that we got from the firebase drivers list.
+     */
     @Override
     public List<String> getDriversNames(final Action<Long> action){
         final List<String> driversNames = new ArrayList<String>();
