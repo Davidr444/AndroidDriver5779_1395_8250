@@ -96,7 +96,7 @@ public class ListViewAdapter extends BaseAdapter{
         viewHolder.addContacts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FactoryBackend.getBackend().changeStatus(drive, Drive.DriveStatus.FINISHED);
+                FactoryBackend.getBackend().changeStatus(drive, Drive.DriveStatus.FINISHED);//
                 ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
                 int rawContactInsertIndex = ops.size();
                 ops.add(ContentProviderOperation.newInsert(ContactsContract.RawContacts.CONTENT_URI)
